@@ -1,0 +1,1050 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HERA AI - 商业计划书 2026</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'PingFang SC', 'Helvetica Neue', sans-serif;
+            background: linear-gradient(135deg, #0a1628 0%, #1a365v 50%, #0a1628 100%);
+            color: #fff;
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
+        
+        .slide {
+            width: 100vw;
+            min-height: 100vh;
+            position: relative;
+            padding: 60px 80px;
+            page-break-after: always;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .slide-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+        }
+        
+        /* Gradient Text */
+        .gradient-text {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .gradient-blue {
+            background: linear-gradient(135deg, #00c6ff 0%, #0072ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .gradient-purple {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        h1 {
+            font-size: 96px;
+            font-weight: 700;
+            letter-spacing: -3px;
+            margin-bottom: 30px;
+            line-height: 1.1;
+        }
+        
+        h2 {
+            font-size: 56px;
+            font-weight: 600;
+            margin-bottom: 60px;
+            letter-spacing: -1px;
+        }
+        
+        .subtitle {
+            font-size: 32px;
+            color: #a0aec0;
+            margin-bottom: 60px;
+            font-weight: 400;
+            line-height: 1.6;
+        }
+        
+        .tagline {
+            font-size: 40px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 80px;
+            font-weight: 600;
+        }
+        
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+        }
+        
+        .three-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 40px;
+        }
+        
+        .section {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+        
+        .section h3 {
+            font-size: 28px;
+            margin-bottom: 24px;
+            color: #fff;
+        }
+        
+        .section ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+        
+        .section li {
+            font-size: 20px;
+            color: #e2e8f0;
+            padding-left: 28px;
+            position: relative;
+            line-height: 1.6;
+        }
+        
+        .section li::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-weight: 700;
+        }
+        
+        .stat-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            margin: 60px 0;
+        }
+        
+        .stat-card {
+            text-align: center;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .stat-number {
+            font-size: 80px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #00c6ff 0%, #0072ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 12px;
+        }
+        
+        .stat-label {
+            font-size: 18px;
+            color: #a0aec0;
+        }
+        
+        .highlight {
+            color: #667eea;
+            font-weight: 600;
+        }
+        
+        .highlight-blue {
+            color: #00c6ff;
+            font-weight: 600;
+        }
+        
+        .quote {
+            font-size: 32px;
+            font-style: italic;
+            color: #e2e8f0;
+            border-left: 5px solid #667eea;
+            padding-left: 40px;
+            margin: 60px 0;
+            line-height: 1.5;
+            background: rgba(102, 126, 234, 0.1);
+            padding: 40px;
+            border-radius: 0 16px 16px 0;
+        }
+        
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 40px 0;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 16px;
+            overflow: hidden;
+        }
+        
+        .comparison-table th {
+            text-align: left;
+            padding: 24px;
+            font-size: 20px;
+            color: #a0aec0;
+            border-bottom: 2px solid #667eea;
+            background: rgba(102, 126, 234, 0.1);
+        }
+        
+        .comparison-table td {
+            padding: 24px;
+            font-size: 18px;
+            color: #e2e8f0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .comparison-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .comparison-table tr:hover {
+            background: rgba(102, 126, 234, 0.05);
+        }
+        
+        .diagram {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 40px;
+            margin: 60px 0;
+            flex-wrap: wrap;
+        }
+        
+        .box {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.2) 0%, rgba(118, 75, 162, 0.2) 100%);
+            border: 2px solid rgba(102, 126, 234, 0.4);
+            border-radius: 16px;
+            padding: 40px 50px;
+            text-align: center;
+            min-width: 280px;
+            transition: transform 0.3s;
+        }
+        
+        .box:hover {
+            transform: translateY(-5px);
+        }
+        
+        .box-title {
+            font-size: 22px;
+            color: #a0aec0;
+            margin-bottom: 12px;
+        }
+        
+        .box-value {
+            font-size: 32px;
+            font-weight: 600;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .arrow {
+            font-size: 48px;
+            color: #667eea;
+        }
+        
+        .video-section {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 20px;
+            padding: 60px;
+            margin: 40px 0;
+            border: 1px solid rgba(102, 126, 234, 0.3);
+        }
+        
+        .video-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 40px;
+        }
+        
+        .video-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .video-placeholder {
+            width: 100%;
+            aspect-ratio: 16/9;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.2) 0%, rgba(118, 75, 162, 0.2) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: #a0aec0;
+        }
+        
+        .video-info {
+            padding: 30px;
+        }
+        
+        .video-title {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #fff;
+        }
+        
+        .video-desc {
+            font-size: 16px;
+            color: #a0aec0;
+            line-height: 1.6;
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin: 40px 0;
+        }
+        
+        .feature-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        
+        .feature-icon {
+            font-size: 40px;
+            margin-bottom: 16px;
+        }
+        
+        .feature-title {
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #fff;
+        }
+        
+        .feature-desc {
+            font-size: 16px;
+            color: #a0aec0;
+            line-height: 1.6;
+        }
+        
+        .timeline {
+            position: relative;
+            padding: 40px 0;
+        }
+        
+        .timeline-item {
+            display: flex;
+            gap: 30px;
+            margin-bottom: 40px;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 16px;
+            border-left: 4px solid #667eea;
+        }
+        
+        .timeline-phase {
+            font-size: 64px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            min-width: 150px;
+        }
+        
+        .timeline-content h3 {
+            font-size: 26px;
+            margin-bottom: 12px;
+            color: #fff;
+        }
+        
+        .timeline-content ul {
+            list-style: none;
+        }
+        
+        .timeline-content li {
+            font-size: 18px;
+            color: #a0aec0;
+            margin-bottom: 8px;
+        }
+        
+        .center {
+            text-align: center;
+        }
+        
+        .logo {
+            font-size: 140px;
+            font-weight: 700;
+            letter-spacing: -5px;
+            margin-bottom: 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%, #00c6ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .honest-note {
+            background: rgba(255, 200, 0, 0.1);
+            border: 1px solid rgba(255, 200, 0, 0.3);
+            border-radius: 16px;
+            padding: 30px;
+            margin: 40px 0;
+        }
+        
+        .honest-note-title {
+            font-size: 20px;
+            color: #ffc107;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .honest-note-content {
+            font-size: 16px;
+            color: #e2e8f0;
+            line-height: 1.8;
+        }
+        
+        /* Navigation */
+        .nav {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            display: flex;
+            gap: 10px;
+            z-index: 1000;
+        }
+        
+        .nav-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(102, 126, 234, 0.3);
+            border: 1px solid rgba(102, 126, 234, 0.5);
+            color: #fff;
+            font-size: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .nav-btn:hover {
+            background: rgba(102, 126, 234, 0.5);
+        }
+        
+        .slide-indicator {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            font-size: 14px;
+            color: #a0aec0;
+            z-index: 1000;
+        }
+        
+        /* Responsive */
+        @media (max-width: 1400px) {
+            h1 { font-size: 72px !important; }
+            h2 { font-size: 42px !important; }
+            .stat-number { font-size: 60px !important; }
+            .two-column, .three-column { grid-template-columns: 1fr; }
+        }
+        
+        @media (max-width: 1024px) {
+            .slide { padding: 40px 60px; }
+            h1 { font-size: 56px !important; }
+            h2 { font-size: 36px !important; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Slide 1: 封面 -->
+    <div class="slide">
+        <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100%; text-align: center;">
+            <div class="logo">HERA</div>
+            <div class="tagline">AI 时代的招聘基础设施</div>
+            <div style="width: 300px; height: 3px; background: linear-gradient(90deg, transparent, #667eea, transparent); margin: 40px 0;"></div>
+            <div class="subtitle" style="font-size: 24px; max-width: 800px;">
+                我们不是另一个招聘平台<br>
+                我们是在为 AI 时代的招聘重建基础设施
+            </div>
+            <div style="margin-top: 80px; font-size: 16px; color: #718096;">
+                2026 年 2 月 · 机密
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 2: 问题 -->
+    <div class="slide">
+        <div class="slide-content">
+            <h2 class="gradient-text">招聘市场... 彻底坏了</h2>
+            
+            <div class="stat-grid">
+                <div class="stat-card">
+                    <div class="stat-number">42 天</div>
+                    <div class="stat-label">平均招聘周期</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">30-40%</div>
+                    <div class="stat-label">HR 时间用于筛选</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">$50k-200k</div>
+                    <div class="stat-label">招错人成本</div>
+                </div>
+            </div>
+            
+            <div class="two-column" style="margin-top: 60px;">
+                <div class="section">
+                    <h3 class="gradient-blue">C 端痛点</h3>
+                    <ul style="margin-top: 24px;">
+                        <li>传统求职周期：<span class="highlight-blue">6-12 周</span></li>
+                        <li>海投无回复（<span class="highlight-blue">&lt;5%</span> 转化率）</li>
+                        <li>好职位在 <span class="highlight-blue">24 小时</span> 内被抢光</li>
+                        <li>需要在 <span class="highlight-blue">7-8 个网站</span> 逐个投递</li>
+                        <li>67% 的职位需要跳转到企业网站申请</li>
+                    </ul>
+                </div>
+                
+                <div class="section">
+                    <h3 class="gradient-purple">B 端痛点</h3>
+                    <ul style="margin-top: 24px;">
+                        <li>发布一个职位：<span class="highlight">~$500/月</span></li>
+                        <li>获取一个候选人：<span class="highlight">~$5,000-10,000</span></li>
+                        <li>40-60% 新员工一年内离职</li>
+                        <li>流量买卖，成本高昂</li>
+                        <li>无法精准匹配，大量浪费</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="quote" style="margin-top: 60px;">
+                "有用的这个 Message 它是在地下的，它不是在提升整个系统的效率。"
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 3: HERA 解决方案 -->
+    <div class="slide">
+        <div class="slide-content">
+            <h2 class="gradient-text">HERA AI：10-20 倍效率提升</h2>
+            
+            <div class="stat-grid" style="margin-top: 60px;">
+                <div class="stat-card">
+                    <div class="stat-number">10-20×</div>
+                    <div class="stat-label">职位覆盖提升</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">7-30×</div>
+                    <div class="stat-label">推荐速度提升</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">90×</div>
+                    <div class="stat-label">投递效率提升</div>
+                </div>
+            </div>
+            
+            <div class="two-column" style="margin-top: 60px;">
+                <div class="section">
+                    <h3 class="gradient-blue">C 端价值</h3>
+                    <ul style="margin-top: 24px;">
+                        <li><span class="highlight-blue">24 小时内推荐</span> - 人为干预打破时间壁垒</li>
+                        <li><span class="highlight-blue">10 秒/次投递</span> - 自动填写表单 + 上传文件</li>
+                        <li><span class="highlight-blue">500+ 申请/天</span> - 用户可投递数量上限</li>
+                        <li><span class="highlight-blue">20-30% 响应率</span> - 目标准确匹配</li>
+                        <li><span class="highlight-blue">5M+ 每日活跃职位</span> - 目标 15M（2026 年 6 月）</li>
+                    </ul>
+                </div>
+                
+                <div class="section">
+                    <h3 class="gradient-purple">B 端价值</h3>
+                    <ul style="margin-top: 24px;">
+                        <li><span class="highlight">短期免费</span> - 快速占领市场</li>
+                        <li><span class="highlight">API 分成</span> - 按调用次数付费</li>
+                        <li><span class="highlight">Skills 市场</span> - 企业购买 Skills 而非人力</li>
+                        <li><span class="highlight">95% 流程自动化</span> - AI 对 AI 初步沟通</li>
+                        <li><span class="highlight">最后 5% 人工确认</span> - 文化 fit + Offer 决策</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="quote" style="margin-top: 60px;">
+                "就是要打破时间壁垒...我们有强行的人为干预去做这个 CV 匹配。"
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 4: 视频演示 -->
+    <div class="slide">
+        <div class="slide-content">
+            <h2 class="gradient-text">产品演示</h2>
+            
+            <div class="video-section">
+                <div class="video-grid">
+                    <div class="video-card">
+                        <div class="video-placeholder">
+                            ▶️ 视频 1: Robert 求职场景
+                        </div>
+                        <div class="video-info">
+                            <div class="video-title">📹 视频 1: Robert 求职</div>
+                            <div class="video-desc">
+                                Robert 使用 HERA 进行求职：<br>
+                                • 智能职位匹配<br>
+                                • 简历优化建议<br>
+                                • 自动投递申请<br>
+                                • 竞争力分析
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="video-card">
+                        <div class="video-placeholder">
+                            ▶️ 视频 2: Jennifer 招聘场景
+                        </div>
+                        <div class="video-info">
+                            <div class="video-title">📹 视频 2: Jennifer 招聘</div>
+                            <div class="video-desc">
+                                Jennifer（Nova AI HR）使用 HERA 招聘：<br>
+                                • 智能发布职位<br>
+                                • AI 候选人筛选<br>
+                                • 自动推送高匹配候选人<br>
+                                • 89 位高匹配度候选人
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="honest-note" style="margin-top: 40px;">
+                    <div class="honest-note-title">⚠️ 说明</div>
+                    <div class="honest-note-content">
+                        视频演示了产品愿景和使用场景。实际功能正在开发中，预计 2026 年 Q2 开始试点测试。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="quote">
+                "提升效率：AI 级别的效率，颠覆格局，打破这个基础设施。"
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 5: 技术架构 -->
+    <div class="slide">
+        <div class="slide-content">
+            <h2 class="gradient-text">技术架构：从 Database 到 Auto Match Tools</h2>
+            
+            <div class="diagram" style="margin-top: 60px;">
+                <div class="box" style="background: rgba(255, 100, 100, 0.1); border-color: rgba(255, 100, 100, 0.3);">
+                    <div class="box-title" style="color: #fc8181;">传统平台</div>
+                    <div class="box-value" style="font-size: 24px; margin-top: 10px;">Database 思维</div>
+                    <div style="font-size: 16px; color: #a0aec0; margin-top: 10px;">职位聚合</div>
+                </div>
+                
+                <div class="arrow">→</div>
+                
+                <div class="box" style="background: rgba(102, 126, 234, 0.2); border-color: rgba(102, 126, 234, 0.5);">
+                    <div class="box-title" style="color: #90cdf4;">HERA AI</div>
+                    <div class="box-value" style="font-size: 24px; margin-top: 10px;">Auto Match Tools</div>
+                    <div style="font-size: 16px; color: #a0aec0; margin-top: 10px;">智能匹配</div>
+                </div>
+            </div>
+            
+            <div class="three-column" style="margin-top: 60px;">
+                <div class="section">
+                    <h3 class="gradient-blue">C 端闭环</h3>
+                    <ul style="margin-top: 20px;">
+                        <li>上传 CV/简历</li>
+                        <li>AI 分析 + 职位匹配</li>
+                        <li>自动生成针对性 CV</li>
+                        <li>自动投递（表单 + 文件）</li>
+                        <li>结果反馈（面试/拒绝）</li>
+                        <li>数据沉淀优化下一次</li>
+                    </ul>
+                </div>
+                
+                <div class="section">
+                    <h3 class="gradient-purple">B 端闭环</h3>
+                    <ul style="margin-top: 20px;">
+                        <li>企业发布职位/API 接入</li>
+                        <li>接收 AI 筛选候选人</li>
+                        <li>AI 对 AI 初步沟通</li>
+                        <li>95% 流程自动化</li>
+                        <li>最后 5% 人工确认</li>
+                        <li>数据沉淀优化匹配</li>
+                    </ul>
+                </div>
+                
+                <div class="section">
+                    <h3 class="gradient-text">数据护城河</h3>
+                    <ul style="margin-top: 20px;">
+                        <li>所有投递记录</li>
+                        <li>反馈/面试结果沉淀</li>
+                        <li>职位 - 技能匹配度标签</li>
+                        <li>响应率/时间模式</li>
+                        <li>行业趋势分析</li>
+                        <li>Data Flywheel 越用越准</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="quote" style="margin-top: 60px;">
+                "这个数据是你的一个很大的 Mode... 包括数据的这些标签，历时一度，然后会有很多的性感这个 Data 我会来推推的出来。"
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 6: 对标公司 -->
+    <div class="slide">
+        <div class="slide-content">
+            <h2 class="gradient-text">对标：Hugging Face + GitHub 模式</h2>
+            
+            <div class="two-column" style="margin-top: 60px;">
+                <div class="section">
+                    <h3 class="gradient-blue">🤗 Hugging Face</h3>
+                    <ul style="margin-top: 24px;">
+                        <li>收集模型/数据集</li>
+                        <li>开发者调用 API</li>
+                        <li>分成模式</li>
+                        <li>基础设施层，开发者优先</li>
+                        <li>API 经济</li>
+                    </ul>
+                    <div style="margin-top: 30px; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.1);">
+                        <div class="gradient-blue" style="font-size: 20px; font-weight: 600; margin-bottom: 12px;">HERA 对标</div>
+                        <ul>
+                            <li>收集职位/Skills</li>
+                            <li>AI/Agent 调用</li>
+                            <li>分成模式</li>
+                            <li>招聘基础设施层，AI 优先</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="section">
+                    <h3 class="gradient-purple">🐙 GitHub</h3>
+                    <ul style="margin-top: 24px;">
+                        <li>代码托管 + 协作平台</li>
+                        <li>开发者生态</li>
+                        <li>网络效应，越用越强</li>
+                        <li>企业版 + 个人版</li>
+                    </ul>
+                    <div style="margin-top: 30px; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.1);">
+                        <div class="gradient-purple" style="font-size: 20px; font-weight: 600; margin-bottom: 12px;">HERA 对标</div>
+                        <ul>
+                            <li>职位托管 + AI 协作</li>
+                            <li>招聘生态</li>
+                            <li>数据 Flywheel，越用越准</li>
+                            <li>B 端 + C 端双向网络</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="quote" style="margin-top: 60px;">
+                "我们收集的不是代码/模型，而是企业的根本性需求。这些需求可能由 AI 或 Skills Agent 完成。"
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 7: 为什么是创业公司 -->
+    <div class="slide">
+        <div class="slide-content">
+            <h2 class="gradient-text">为什么必须是创业公司来做？</h2>
+            
+            <table class="comparison-table" style="margin-top: 60px;">
+                <thead>
+                    <tr>
+                        <th style="width: 20%;">维度</th>
+                        <th style="width: 40%;">现有公司（LinkedIn/Indeed）</th>
+                        <th style="width: 40%;">创业公司（HERA）</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>商业模式</strong></td>
+                        <td>$10B/年招聘收入<br><span style="color: #fc8181; font-size: 15px;">自我蚕食风险，董事会不会允许</span></td>
+                        <td>无历史包袱<br><span style="color: #68d391; font-size: 15px;">可以颠覆，不用保护现有收入</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>决策速度</strong></td>
+                        <td>30 人团队，3 个月审批<br><span style="color: #fc8181; font-size: 15px;">组织惯性，技术债务重</span></td>
+                        <td>3 人团队，1 周上线<br><span style="color: #68d391; font-size: 15px;">AI 原生设计，快速迭代</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>数据范式</strong></td>
+                        <td>9 亿份过时简历（平均 3 年）<br><span style="color: #fc8181; font-size: 15px;">数量 > 质量，Database 思维</span></td>
+                        <td>实时行为数据<br><span style="color: #68d391; font-size: 15px;">质量 > 数量，Auto Match 思维</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>心智定位</strong></td>
+                        <td>用户定义：职业社交<br><span style="color: #fc8181; font-size: 15px;">无法重新定义为 AI Partner</span></td>
+                        <td>AI Partner（空白心智）<br><span style="color: #68d391; font-size: 15px;">新品类定义者</span></td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <div class="quote" style="margin-top: 60px;">
+                "现有的这些公司为什么不行，就一定是一个创业公司来做。"<br>
+                <span style="color: #a0aec0; font-size: 20px;">历史教训：Netflix vs Blockbuster, iPhone vs Nokia</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 8: 市场机会 -->
+    <div class="slide">
+        <div class="slide-content">
+            <h2 class="gradient-text">TAM：做 1% 就足够</h2>
+            
+            <div class="quote" style="margin-top: 40px;">
+                错误逻辑：HR 科技市场 $969B（静态市场规模）<br>
+                <span style="color: #a0aec0; font-size: 24px;">正确逻辑：AI 替代人力带来的效率红利，创造新蛋糕</span>
+            </div>
+            
+            <div class="two-column" style="margin-top: 60px;">
+                <div class="section">
+                    <h3 class="gradient-blue">企业端 TAM 计算</h3>
+                    <div style="font-size: 20px; line-height: 2; margin-top: 24px;">
+                        <div>现在：花 <span class="highlight-blue">100 块</span> 做人做的事</div>
+                        <div>未来：花 <span class="highlight-blue">20 块</span> 用 AI 做同样的事</div>
+                        <div style="margin: 20px 0; padding: 20px; background: rgba(0, 255, 100, 0.1); border-radius: 12px;">
+                            省 <span class="highlight-blue">80 块</span> = 新增利润
+                        </div>
+                        <div>80 块利润中的 <span class="highlight-blue">70 块</span> 又 reinvest 到 AI</div>
+                        <div>→ AI 能力变强 → 替代更多人 → 利润更高</div>
+                        <div style="color: #68d391; font-weight: 600;">→ 热性循环</div>
+                    </div>
+                </div>
+                
+                <div class="section">
+                    <h3 class="gradient-purple">个人端 TAM 计算</h3>
+                    <div style="font-size: 20px; line-height: 2; margin-top: 24px;">
+                        <div>时间成本 + 中介费 + 培训费</div>
+                        <div>如果我们能帮你省 <span class="highlight-purple">20-30%</span></div>
+                        <div style="margin: 20px 0; padding: 20px; background: rgba(102, 126, 234, 0.1); border-radius: 12px;">
+                            这个市场有多大？
+                        </div>
+                        <div>全球企业在 HR 领域的总支出</div>
+                        <div>× AI 能完成的 <span class="highlight-purple">20-30%</span></div>
+                        <div>× 我们能分到的比例</div>
+                        <div style="color: #90cdf4; font-weight: 600; margin-top: 20px;">即使只做 1%，也是巨大市场</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="quote" style="margin-top: 60px;">
+                "每个人在 HR 领域付了多少钱...你将来用你的这一块，如果只能帮他完成百分之二十或者三十这些事情的活，然后你在你们再说去一个比他现在所花的钱，就是一个百分之二十到三十，就大家都省钱了，那是你抓到这个钱。"
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 9: 愿景 -->
+    <div class="slide">
+        <div class="slide-content">
+            <h2 class="gradient-text">终极愿景：Skills 市场</h2>
+            
+            <div class="section" style="margin-top: 60px; background: rgba(102, 126, 234, 0.1); border-color: rgba(102, 126, 234, 0.3);">
+                <h3 style="font-size: 32px; margin-bottom: 30px;">🎯 从"招人"到"购买 Skills"</h3>
+                <div style="font-size: 24px; line-height: 1.8;">
+                    <div style="margin-bottom: 20px;">
+                        <span class="gradient-blue">现在</span>：企业雇佣人
+                    </div>
+                    <div style="margin-bottom: 20px;">
+                        <span class="gradient-purple">未来</span>：企业购买 Skills
+                    </div>
+                    <div style="margin-top: 40px; padding: 30px; background: rgba(255, 255, 255, 0.05); border-radius: 12px;">
+                        "以后不是请人而请 Skills... 你把一个很牛的人写的 Skills 分发到很多的地方以后，你会发现他虽然做不到那个牛人的版本，但做了七八十还是没有问题的，这个就很吓人了。"
+                    </div>
+                </div>
+            </div>
+            
+            <div class="three-column" style="margin-top: 60px;">
+                <div class="section">
+                    <div class="feature-icon">🏢</div>
+                    <div class="feature-title">Anthropic 案例</div>
+                    <div class="feature-desc">
+                        需要某个领域专家<br>
+                        传统：雇佣全职员工<br>
+                        未来：购买该专家的 Skills<br>
+                        成本更低，效率更高
+                    </div>
+                </div>
+                
+                <div class="section">
+                    <div class="feature-icon">🚀</div>
+                    <div class="feature-title">可复制性</div>
+                    <div class="feature-desc">
+                        一个很牛的人写的 Skills<br>
+                        分发到很多地方<br>
+                        虽然做不到 100%<br>
+                        但 70-80% 没问题
+                    </div>
+                </div>
+                
+                <div class="section">
+                    <div class="feature-icon">💡</div>
+                    <div class="feature-title">市场想象</div>
+                    <div class="feature-desc">
+                        不被限制在"人员招聘"<br>
+                        企业需求与 Skills 匹配<br>
+                        市场盘子随 AI 发展扩大<br>
+                        甚至招 AI Agent 都可以
+                    </div>
+                </div>
+            </div>
+            
+            <div class="quote" style="margin-top: 60px;">
+                "你抬镜的不是人不是盘子一生，抬镜的是企业的需求。那但凡企业还有需求，不管他是招人还是招 Skills 来找 AI Agent，甚至招算了你都可以飞挖就可以了。"
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 10: 融资需求 -->
+    <div class="slide">
+        <div class="slide-content">
+            <div style="text-align: center; margin-bottom: 60px;">
+                <h2 class="gradient-text">融资需求</h2>
+            </div>
+            
+            <div class="stat-grid" style="margin-bottom: 60px;">
+                <div class="stat-card">
+                    <div class="stat-number">$500k</div>
+                    <div class="stat-label">Pre-Seed 轮</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">18 个月</div>
+                    <div class="stat-label">跑道</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">$2.5-3.5M</div>
+                    <div class="stat-label">投后估值</div>
+                </div>
+            </div>
+            
+            <div class="two-column" style="margin-bottom: 60px;">
+                <div class="section">
+                    <h3 class="gradient-blue">资金用途</h3>
+                    <ul style="margin-top: 24px;">
+                        <li><span class="highlight-blue">50% 研发</span> - 产品开发、技术团队</li>
+                        <li><span class="highlight-blue">30% 市场</span> - 用户获取、品牌建设</li>
+                        <li><span class="highlight-blue">20% 运营</span> - 日常运营、云服务</li>
+                    </ul>
+                </div>
+                
+                <div class="section">
+                    <h3 class="gradient-purple">里程碑</h3>
+                    <ul style="margin-top: 24px;">
+                        <li>完成 Phase 1-3 验证</li>
+                        <li>10 家企业试点</li>
+                        <li>500+ 活跃用户</li>
+                        <li>达到 Seed 轮指标</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="section" style="background: rgba(102, 126, 234, 0.1); border-color: rgba(102, 126, 234, 0.3);">
+                <h3 class="gradient-text" style="text-align: center; margin-bottom: 30px;">我们在寻找</h3>
+                <div class="three-column">
+                    <div style="text-align: center;">
+                        <div style="font-size: 48px; font-weight: 700; color: #667eea;">10</div>
+                        <div style="font-size: 18px; color: #a0aec0; margin-top: 8px;">家企业 HR<br>免费 6 个月</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="font-size: 48px; font-weight: 700; color: #764ba2;">90</div>
+                        <div style="font-size: 18px; color: #a0aec0; margin-top: 8px;">个活跃求职者<br>免费 6 个月</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="font-size: 48px; font-weight: 700; color: #00c6ff;">3-5</div>
+                        <div style="font-size: 18px; color: #a0aec0; margin-top: 8px;">位天使投资人<br>理解风险，愿意陪跑</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="quote" style="margin-top: 60px; text-align: center; border: none; background: none;">
+                <div style="font-size: 28px; line-height: 1.8;">
+                    如果你相信：<br>
+                    招聘可以更好 · AI 应该帮助人发挥价值 · 诚实的创业比完美的 PPT 更重要
+                </div>
+                <div style="margin-top: 40px; font-size: 32px; font-weight: 600; color: #667eea;">
+                    请联系我们
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Navigation -->
+    <div class="nav">
+        <button class="nav-btn" onclick="scrollSlide(-1)">↑</button>
+        <button class="nav-btn" onclick="scrollSlide(1)">↓</button>
+    </div>
+    <div class="slide-indicator" id="slideIndicator">Slide 1 / 10</div>
+    
+    <script>
+        const slides = document.querySelectorAll('.slide');
+        let currentSlide = 0;
+        
+        function updateIndicator() {
+            document.getElementById('slideIndicator').textContent = `Slide ${currentSlide + 1} / ${slides.length}`;
+        }
+        
+        function scrollSlide(direction) {
+            const newIndex = currentSlide + direction;
+            if (newIndex >= 0 && newIndex < slides.length) {
+                currentSlide = newIndex;
+                slides[currentSlide].scrollIntoView({ behavior: 'smooth', block: 'start' });
+                updateIndicator();
+            }
+        }
+        
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowDown' || e.key === 'PageDown') scrollSlide(1);
+            else if (e.key === 'ArrowUp' || e.key === 'PageUp') scrollSlide(-1);
+        });
+        
+        window.addEventListener('scroll', () => {
+            const scrollPos = window.scrollY + window.innerHeight / 2;
+            slides.forEach((slide, index) => {
+                if (scrollPos >= slide.offsetTop && scrollPos < slide.offsetTop + slide.offsetHeight) {
+                    currentSlide = index;
+                    updateIndicator();
+                }
+            });
+        });
+        
+        document.addEventListener('dblclick', () => {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen().catch(err => console.log('Fullscreen error:', err));
+            } else {
+                document.exitFullscreen();
+            }
+        });
+        
+        updateIndicator();
+    </script>
+</body>
+</html>

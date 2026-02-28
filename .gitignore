@@ -1,0 +1,9 @@
+# 忽略大文件
+*.mp4
+*.mov
+*.avi
+*.DS_Store
+*.bak
+# 临时文件
+*.tmp
+*.swp

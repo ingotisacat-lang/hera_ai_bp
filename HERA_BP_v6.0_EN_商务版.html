@@ -1,0 +1,1670 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Héra AI - 商业计划书</title>
+    <style>
+        /* =============================================
+           基础重置
+           ============================================= */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            font-size: 12pt;
+        }
+
+        body {
+            font-family: "PingFang SC", "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.8;
+            color: #2d3748;
+            background: #fff;
+            max-width: 210mm;
+            margin: 0 auto;
+            padding: 0;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+
+        /* =============================================
+           打印设置
+           ============================================= */
+        @page {
+            size: A4;
+            margin: 15mm 20mm;
+        }
+
+        @media print {
+            body {
+                max-width: none;
+                margin: 0;
+            }
+            .no-print {
+                display: none !important;
+            }
+            a {
+                text-decoration: none;
+                color: #000;
+            }
+            .page {
+                page-break-after: always;
+                break-after: page;
+            }
+            .page:last-child {
+                page-break-after: auto;
+            }
+            .video-container {
+                page-break-inside: avoid;
+            }
+        }
+
+        /* =============================================
+           色彩系统 - 商务浅色调
+           ============================================= */
+        :root {
+            /* 主色 - 商务蓝 */
+            --primary: #065f46;
+            --primary-light: #14b8a6;
+            --primary-dark: #064e3b;
+            
+            /* 辅助色 - 专业灰 */
+            --accent: #4a5568;
+            --accent-light: #718096;
+            
+            /* 文字色 */
+            --text-primary: #1a202c;
+            --text-secondary: #4a5568;
+            --text-light: #718096;
+            --text-muted: #a0aec0;
+            
+            /* 背景色 */
+            --bg-primary: #ffffff;
+            --bg-secondary: #f7fafc;
+            --bg-tertiary: #edf2f7;
+            
+            /* 边框色 */
+            --border: #e2e8f0;
+            --border-dark: #cbd5e0;
+            
+            /* 强调色 */
+            --success: #38a169;
+            --warning: #d69e2e;
+            --error: #e53e3e;
+        }
+
+        /* =============================================
+           页面容器
+           ============================================= */
+        .page {
+            min-height: 297mm;
+            padding: 15mm 20mm;
+            background: #fff;
+        }
+
+        /* =============================================
+           封面设计
+           ============================================= */
+        .cover-page {
+            background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 40mm 20mm;
+        }
+
+        .cover-header {
+            border-top: 4px solid var(--primary);
+            padding-top: 30px;
+            margin-bottom: 40px;
+        }
+
+        .cover-logo {
+            font-size: 56pt;
+            font-weight: 700;
+            color: var(--primary-dark);
+            letter-spacing: 4px;
+            margin-bottom: 15px;
+        }
+
+        .cover-tagline {
+            font-size: 16pt;
+            font-weight: 400;
+            color: var(--text-secondary);
+            margin-bottom: 50px;
+        }
+
+        .cover-title {
+            font-size: 28pt;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 60px;
+        }
+
+        .cover-meta {
+            font-size: 9.5pt;
+            color: var(--text-muted);
+            border-top: 1px solid var(--border);
+            padding-top: 20px;
+        }
+
+        .cover-meta p {
+            margin: 6px 0;
+        }
+
+        /* =============================================
+           标题样式
+           ============================================= */
+        .chapter-title {
+            font-size: 24pt;
+            font-weight: 600;
+            color: var(--primary-dark);
+            margin-bottom: 30px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--primary);
+        }
+
+        .section-title {
+            font-size: 15pt;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin: 28px 0 16px 0;
+        }
+
+        h3 {
+            font-size: 11.5pt;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin: 18px 0 10px 0;
+        }
+
+        /* =============================================
+           内容卡片
+           ============================================= */
+        .content-card {
+            background: var(--bg-secondary);
+            border-left: 3px solid var(--primary);
+            padding: 18px 20px;
+            margin: 18px 0;
+            border-radius: 0 6px 6px 0;
+        }
+
+        .content-card-title {
+            font-size: 12pt;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .content-card-content {
+            font-size: 10.5pt;
+            color: var(--text-secondary);
+        }
+
+        .content-card-content p {
+            margin: 8px 0;
+        }
+
+        /* =============================================
+           核心观点框
+           ============================================= */
+        .insight-box {
+            background: #fff;
+            border: 1.5px solid var(--primary);
+            border-radius: 6px;
+            padding: 16px 20px;
+            margin: 18px 0;
+        }
+
+        .insight-label {
+            font-size: 8.5pt;
+            font-weight: 600;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+
+        .insight-content {
+            font-size: 10.5pt;
+            color: var(--text-primary);
+            line-height: 1.7;
+        }
+
+        /* =============================================
+           数据标注框
+           ============================================= */
+        .data-note {
+            background: #fffaf0;
+            border-left: 3px solid var(--warning);
+            padding: 10px 14px;
+            margin: 14px 0;
+            font-size: 9pt;
+            color: #975a16;
+        }
+
+        .data-note strong {
+            color: #744210;
+        }
+
+        /* =============================================
+           表格样式
+           ============================================= */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 16px 0;
+            font-size: 9.5pt;
+        }
+
+        th {
+            background: var(--primary);
+            color: #fff;
+            padding: 10px 12px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 9.5pt;
+        }
+
+        td {
+            padding: 10px 12px;
+            border-bottom: 1px solid var(--border);
+            color: var(--text-secondary);
+        }
+
+        tr:nth-child(even) {
+            background: var(--bg-secondary);
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* =============================================
+           列表
+           ============================================= */
+        ul {
+            margin: 12px 0;
+            padding-left: 20px;
+        }
+
+        li {
+            margin-bottom: 8px;
+            color: var(--text-secondary);
+            font-size: 10.5pt;
+        }
+
+        /* 场景化视频展示 - 根据视频类型选择布局 */
+        .scene-container {
+            margin: 32px 0;
+        }
+
+        /* 竖屏视频：左右布局 */
+        .scene-container.vertical {
+            display: flex;
+            gap: 24px;
+            align-items: flex-start;
+        }
+
+        .scene-container.vertical .scene-video {
+            flex: 0 0 280px;
+        }
+
+        .scene-container.vertical .video-wrapper {
+            position: relative;
+            padding-bottom: 177.78%; /* 9:16 竖屏 */
+            height: 0;
+            background: transparent;
+            overflow: visible;
+        }
+
+        .scene-container.vertical .video-wrapper video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .scene-container.vertical .scene-content {
+            flex: 1;
+            padding-top: 8px;
+        }
+
+        /* 横屏视频：上下布局 */
+        .scene-container.horizontal {
+            display: block;
+        }
+
+        .scene-container.horizontal .scene-video {
+            width: 100%;
+            max-width: 560px;
+            margin: 0 auto;
+            display: block;
+        }
+
+        .scene-container.horizontal .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 横屏 */
+            height: 0;
+            background: transparent;
+            overflow: visible;
+        }
+
+        .scene-container.horizontal .video-wrapper video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .scene-container.horizontal .scene-content {
+            margin-top: 20px;
+            padding: 0 20px;
+        }
+
+        /* 通用内容样式 */
+        .scene-label {
+            font-size: 9.5pt;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+        }
+
+        .scene-character {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid rgba(44, 82, 130, 0.1);
+        }
+
+        .scene-avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary) 0%, #4a6fa5 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-weight: 700;
+            font-size: 13pt;
+        }
+
+        .scene-character-info h4 {
+            margin: 0 0 4px 0;
+            font-size: 11.5pt;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .scene-character-info .role {
+            font-size: 8.5pt;
+            color: var(--text-light);
+            font-style: italic;
+        }
+
+        .scene-narrative {
+            font-size: 9.5pt;
+            line-height: 1.7;
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+        }
+
+        .scene-narrative p {
+            margin: 0 0 12px 0;
+        }
+
+        .scene-hera-role {
+            background: rgba(44, 82, 130, 0.06);
+            border-left: 3px solid var(--primary);
+            padding: 12px 16px;
+            border-radius: 0 8px 8px 0;
+            font-size: 9pt;
+            line-height: 1.6;
+            color: var(--text-primary);
+        }
+
+        .scene-hera-role strong {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .scene-meta {
+            margin-top: 16px;
+            font-size: 8.5pt;
+            color: var(--text-light);
+            font-style: italic;
+        }
+
+        .scene-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .scene-character {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .scene-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary) 0%, #4a6fa5 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-weight: 700;
+            font-size: 14pt;
+        }
+
+        .scene-character-info h4 {
+            margin: 0 0 4px 0;
+            font-size: 12pt;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .scene-character-info .role {
+            font-size: 8.5pt;
+            color: var(--text-light);
+            font-style: italic;
+        }
+
+        .scene-narrative {
+            font-size: 9.5pt;
+            line-height: 1.7;
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+        }
+
+        .scene-narrative p {
+            margin: 0 0 12px 0;
+        }
+
+        .scene-hera-role {
+            background: rgba(44, 82, 130, 0.06);
+            border-left: 3px solid var(--primary);
+            padding: 12px 16px;
+            border-radius: 0 8px 8px 0;
+            font-size: 9pt;
+            line-height: 1.6;
+            color: var(--text-primary);
+        }
+
+        .scene-hera-role strong {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .scene-meta {
+            margin-top: 16px;
+            font-size: 8pt;
+            color: var(--text-light);
+            font-style: italic;
+        }
+
+        /* =============================================
+           目录
+           ============================================= */
+        .toc {
+            background: var(--bg-secondary);
+            padding: 22px;
+            border-radius: 6px;
+            margin: 18px 0;
+        }
+
+        .toc-title {
+            font-size: 16pt;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 18px;
+            text-align: center;
+        }
+
+        .toc-chapter {
+            margin-bottom: 18px;
+            padding-bottom: 18px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .toc-chapter:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .toc-chapter-title {
+            font-size: 11pt;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+
+        .toc-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 6px 0 6px 12px;
+            font-size: 9.5pt;
+            color: var(--text-secondary);
+        }
+
+        .toc-page {
+            color: var(--text-light);
+        }
+
+        /* =============================================
+           页脚
+           ============================================= */
+        .footer {
+            text-align: center;
+            padding: 22px 0 0 0;
+            margin-top: 35px;
+            border-top: 1.5px solid var(--border);
+            font-size: 8.5pt;
+            color: var(--text-muted);
+        }
+
+        .footer-logo {
+            font-size: 14pt;
+            font-weight: 700;
+            color: var(--primary-dark);
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        /* =============================================
+           附录框
+           ============================================= */
+        .appendix {
+            background: var(--bg-secondary);
+            padding: 20px;
+            border-radius: 6px;
+            margin: 18px 0;
+        }
+
+        .appendix-title {
+            font-size: 13pt;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 14px;
+        }
+
+        /* =============================================
+           打印提示
+           ============================================= */
+        .print-hint {
+            background: #ebf8ff;
+            padding: 16px;
+            margin: 15px;
+            border-radius: 6px;
+            text-align: center;
+            border: 1px solid var(--primary-light);
+        }
+
+        .print-hint h3 {
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+
+        .print-hint p {
+            color: var(--text-secondary);
+            margin: 4px 0;
+            font-size: 9.5pt;
+        }
+
+        /* =============================================
+           强调文字
+           ============================================= */
+        strong {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .highlight {
+            background: #fefcbf;
+            padding: 2px 6px;
+            border-radius: 3px;
+        }
+
+        /* =============================================
+           引用框
+           ============================================= */
+        .quote-box {
+            background: var(--bg-tertiary);
+            border-left: 4px solid var(--primary);
+            padding: 16px 20px;
+            margin: 18px 0;
+            font-style: italic;
+            color: var(--text-secondary);
+        }
+    </style>
+</head>
+<body>
+    <!-- 封面 -->
+    <div class="page cover-page">
+        <div class="cover-header">
+            <div class="cover-logo">Héra AI</div>
+            <div class="cover-tagline">让每个人都被看见，让每个机会都被匹配</div>
+        </div>
+        <div class="cover-title">商业计划书<br><span style="font-weight: 400; font-size: 20pt; color: var(--text-secondary);">重塑人才与机会的连接方式</span></div>
+        <div class="cover-meta">
+            <p>文档版本：v5.0 商务增强版</p>
+            <p>更新日期：2026 年 2 月 28 日</p>
+            <p>保密级别：投资人专享 · 未经许可不得外传</p>
+        </div>
+    </div>
+
+    <!-- 目录 -->
+    <div class="page">
+        <h1 class="chapter-title">目录</h1>
+        <div class="toc">
+            <div class="toc-chapter">
+                <div class="toc-chapter-title">第一章 困局：前 AI 时代的人才市场</div>
+                <div class="toc-item">
+                    <span>1.1 求职者的困境：一场不公平的战争</span>
+                    <span class="toc-page">3</span>
+                </div>
+                <div class="toc-item">
+                    <span>1.2 招聘者的困境：大海捞针的徒劳</span>
+                    <span class="toc-page">4</span>
+                </div>
+                <div class="toc-item">
+                    <span>1.3 平台的局限性：为什么无法自我革新</span>
+                    <span class="toc-page">4</span>
+                </div>
+            </div>
+            <div class="toc-chapter">
+                <div class="toc-chapter-title">第二章 变革：AI 时代的范式转移</div>
+                <div class="toc-item">
+                    <span>2.1 从"人找工作"到"AI 帮人找工作"</span>
+                    <span class="toc-page">5</span>
+                </div>
+                <div class="toc-item">
+                    <span>2.2 效率提升：量变到质变</span>
+                    <span class="toc-page">6</span>
+                </div>
+                <div class="toc-item">
+                    <span>2.3 视频演示：AI 时代的招聘场景</span>
+                    <span class="toc-page">7</span>
+                </div>
+            </div>
+            <div class="toc-chapter">
+                <div class="toc-chapter-title">第三章 预见：未来工作的三种形态</div>
+                <div class="toc-item">
+                    <span>3.1 三阶段演进路线图</span>
+                    <span class="toc-page">8</span>
+                </div>
+                <div class="toc-item">
+                    <span>3.2 Skills 市场：工作本质的重构</span>
+                    <span class="toc-page">8</span>
+                </div>
+                <div class="toc-item">
+                    <span>3.3 终极愿景：企业需求市场</span>
+                    <span class="toc-page">9</span>
+                </div>
+            </div>
+            <div class="toc-chapter">
+                <div class="toc-chapter-title">第四章 定位：Héra 是谁</div>
+                <div class="toc-item">
+                    <span>4.1 三层定位：从产品到生态</span>
+                    <span class="toc-page">10</span>
+                </div>
+                <div class="toc-item">
+                    <span>4.2 C 端核心价值</span>
+                    <span class="toc-page">10</span>
+                </div>
+                <div class="toc-item">
+                    <span>4.3 商业模式与单位经济</span>
+                    <span class="toc-page">11</span>
+                </div>
+            </div>
+            <div class="toc-chapter">
+                <div class="toc-chapter-title">第五章 前景：AI 时代的机遇</div>
+                <div class="toc-item">
+                    <span>5.1 历史视角：技术革命与就业</span>
+                    <span class="toc-page">12</span>
+                </div>
+                <div class="toc-item">
+                    <span>5.2 Héra 的护城河：企业需求</span>
+                    <span class="toc-page">12</span>
+                </div>
+            </div>
+            <div class="toc-chapter">
+                <div class="toc-chapter-title">第六章 优势：为什么是 Héra</div>
+                <div class="toc-item">
+                    <span>6.1 为什么不是 SEEK/LinkedIn</span>
+                    <span class="toc-page">13</span>
+                </div>
+                <div class="toc-item">
+                    <span>6.2 Héra 的独特优势</span>
+                    <span class="toc-page">13</span>
+                </div>
+                <div class="toc-item">
+                    <span>6.3 对标公司：Hugging Face + GitHub</span>
+                    <span class="toc-page">14</span>
+                </div>
+            </div>
+            <div class="toc-chapter">
+                <div class="toc-chapter-title">Chapter 7: Action</div>
+                <div class="toc-item">
+                    <span>7.1 Financing</span>
+                    <span class="toc-page">15</span>
+                </div>
+                <div class="toc-item">
+                    <span>7.2 Next Steps</span>
+                    <span class="toc-page">15</span>
+                </div>
+                <div class="toc-item">
+                    <span>7.3 Risks</span>
+                    <span class="toc-page">16</span>
+                </div>
+            </div>
+            <div class="toc-chapter">
+                <div class="toc-chapter-title">Appendix: Data Sources</div>
+                <div class="toc-item">
+                    <span>数据可信度分布</span>
+                    <span class="toc-page">17</span>
+                </div>
+                <div class="toc-item">
+                    <span>关键数据标注说明</span>
+                    <span class="toc-page">17</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 序言 -->
+    <div class="page">
+        <h1 class="chapter-title">序言：一个正在发生的变革</h1>
+        
+        <div class="content-card">
+            <div class="content-card-title">Sarah 的求职故事</div>
+            <div class="content-card-content">
+                <p>2026 年的清晨，Sarah 像过去三个月的每一天一样，在凌晨 5 点醒来。她打开 LinkedIn，刷新了第 47 次。屏幕上显示"3 个新职位"，但当她点击时，两个已经"停止接受申请"，第三个要求她跳转到公司官网重新填写所有信息。</p>
+                <p>这是第 83 次投递。她还没有收到任何回复。</p>
+            </div>
+        </div>
+
+        <div class="content-card">
+            <div class="content-card-title">Michael 的招聘困境</div>
+            <div class="content-card-content">
+                <p>与此同时，在城市的另一端，HR 总监 Michael 正对着屏幕上的 527 份简历叹气。这个职位已经挂了 6 周，花费了 4,000 美元的发布费，但真正匹配的候选人可能连 10 个都不到。他的团队花了整整 30 个小时筛选，还是担心错过那个"对的人"。</p>
+                <p><strong>这不是两个人的困境。这是整个系统的困境。</strong></p>
+            </div>
+        </div>
+
+        <div class="insight-box">
+            <div class="insight-label">核心洞察</div>
+            <div class="insight-content">
+                传统招聘系统建立于一个信息稀缺的时代。但今天，我们面对的是一个信息过载的时代——职位太多、简历太多、噪音太多，而真正有效的信号却被淹没。<br><br>
+                <strong>Héra AI 不是为了优化这个系统而生。我们是为了重建它。</strong>
+            </div>
+        </div>
+    </div>
+
+    <!-- 第一章 -->
+    <div class="page">
+        <h1 class="chapter-title">第一章 困局：前 AI 时代的人才市场</h1>
+
+        <h2 class="section-title">1.1 求职者的困境：一场不公平的战争</h2>
+
+        <h3>时间成本：被偷走的 6-12 周</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>活动</th>
+                    <th>每周耗时</th>
+                    <th>总耗时（8 周）</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>搜索和筛选职位</td>
+                    <td>10-15 小时</td>
+                    <td>80-120 小时</td>
+                </tr>
+                <tr>
+                    <td>定制简历和求职信</td>
+                    <td>5-8 小时</td>
+                    <td>40-64 小时</td>
+                </tr>
+                <tr>
+                    <td>填写在线申请表</td>
+                    <td>8-12 小时</td>
+                    <td>64-96 小时</td>
+                </tr>
+                <tr>
+                    <td>等待和跟进</td>
+                    <td>3-5 小时</td>
+                    <td>24-40 小时</td>
+                </tr>
+                <tr>
+                    <td>面试准备</td>
+                    <td>5-10 小时</td>
+                    <td>40-80 小时</td>
+                </tr>
+                <tr>
+                    <td><strong>总计</strong></td>
+                    <td><strong>31-50 小时/周</strong></td>
+                    <td><strong>248-400 小时</strong></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="data-note">
+            <strong>数据标注：</strong>美国劳工统计局（BLS）2022 年数据显示，美国人找到工作的平均时间为 22.3 周（约 5-6 个月）。文档中"6-12 周"可能针对特定行业或职位级别。来源：Zippia 引用 BLS 数据
+        </div>
+
+        <h3>经济成本：隐形的求职税</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>支出项</th>
+                    <th>金额</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>简历优化服务</td>
+                    <td>200-500 美元</td>
+                </tr>
+                <tr>
+                    <td>职业咨询</td>
+                    <td>150-300 美元/小时</td>
+                </tr>
+                <tr>
+                    <td>技能培训课程</td>
+                    <td>1,000-5,000 美元</td>
+                </tr>
+                <tr>
+                    <td>猎头服务费（隐性）</td>
+                    <td>年薪 15-25%</td>
+                </tr>
+                <tr>
+                    <td><strong>总计</strong></td>
+                    <td><strong>3,500-8,000 美元</strong></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="insight-box">
+            <div class="insight-label">本章核心结论</div>
+            <div class="insight-content">
+                前 AI 时代的招聘系统不是"需要优化"，而是"需要重建"。问题的根源不在于执行，而在于设计。
+            </div>
+        </div>
+    </div>
+
+    <!-- 第一章 续 -->
+    <div class="page">
+        <h1 class="chapter-title">第一章 困局：前 AI 时代的人才市场（续）</h1>
+
+        <h2 class="section-title">1.2 招聘者的困境：大海捞针的徒劳</h2>
+
+        <h3>经济成本：昂贵的低效</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>成本项</th>
+                    <th>金额</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>职位发布费（SEEK/LinkedIn）</td>
+                    <td>300-500 美元/月/职位</td>
+                </tr>
+                <tr>
+                    <td>猎头费（如使用）</td>
+                    <td>30,000-37,500 美元（年薪 20-25%）</td>
+                </tr>
+                <tr>
+                    <td>HR 团队人力成本</td>
+                    <td>5,000-10,000 美元</td>
+                </tr>
+                <tr>
+                    <td>职位空缺成本</td>
+                    <td>10,000-30,000 美元</td>
+                </tr>
+                <tr>
+                    <td><strong>总计</strong></td>
+                    <td><strong>45,600-78,500 美元</strong></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="data-note">
+            <strong>数据标注：</strong>SHRM 报告显示平均单次招聘总成本约 4,700 美元（2022 年），但这是"每雇佣一人"而非"每申请者"。来源：SHRM
+        </div>
+
+        <h2 class="section-title">1.3 平台的局限性：为什么无法自我革新</h2>
+
+        <div class="insight-box">
+            <div class="insight-label">本质问题</div>
+            <div class="insight-content">
+                SEEK 和 LinkedIn 不是"招聘公司"，它们是"广告公司"。当平台靠发布费赚钱时，它们不会真正关心匹配质量。
+            </div>
+        </div>
+
+        <h3>Database 思维的天花板</h3>
+        <div class="content-card">
+            <div class="content-card-content">
+                <p><strong>传统平台逻辑：</strong></p>
+                <p>1. 企业发布职位 → 存入数据库<br>
+                2. 求职者搜索关键词 → 检索数据库<br>
+                3. 投递简历 → 存入数据库<br>
+                4. HR 筛选关键词 → 检索数据库<br>
+                5. 重复直到有人入职</p>
+                <p style="margin-top: 15px;"><strong>问题：</strong><br>
+                关键词匹配无法理解能力本质<br>
+                被动检索无法主动发现机会<br>
+                数据孤岛导致重复劳动<br>
+                无反馈闭环导致无法优化</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 第二章 -->
+    <div class="page">
+        <h1 class="chapter-title">第二章 变革：AI 时代的范式转移</h1>
+
+        <h2 class="section-title">2.1 从"人找工作"到"AI 帮人找工作"</h2>
+
+        <div class="insight-box">
+            <div class="insight-label">核心转变</div>
+            <div class="insight-content">
+                系统为人服务，而不是人为系统服务。
+            </div>
+        </div>
+
+        <h3>范式对比</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>维度</th>
+                    <th>前 AI 时代</th>
+                    <th>AI 时代</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>搜索</strong></td>
+                    <td>人搜索关键词</td>
+                    <td>AI 理解能力 + 偏好</td>
+                </tr>
+                <tr>
+                    <td><strong>匹配</strong></td>
+                    <td>关键词匹配</td>
+                    <td>语义理解 + 能力图谱</td>
+                </tr>
+                <tr>
+                    <td><strong>申请</strong></td>
+                    <td>人填写 15 分钟/次</td>
+                    <td>AI 填写 10 秒/次</td>
+                </tr>
+                <tr>
+                    <td><strong>跟踪</strong></td>
+                    <td>人记录进度</td>
+                    <td>AI 自动跟踪 + 提醒</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2 class="section-title">2.2 效率提升：量变到质变</h2>
+
+        <h3>Héra AI 的效率数据</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>维度</th>
+                    <th>传统</th>
+                    <th>Héra</th>
+                    <th>提升</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>推荐速度</strong></td>
+                    <td>数周</td>
+                    <td>24 小时</td>
+                    <td>7-30 倍</td>
+                </tr>
+                <tr>
+                    <td><strong>投递效率</strong></td>
+                    <td>15 分钟/个</td>
+                    <td>10 秒/个</td>
+                    <td>90 倍</td>
+                </tr>
+                <tr>
+                    <td><strong>响应率</strong></td>
+                    <td>约 5%</td>
+                    <td>20-30%</td>
+                    <td>4-6 倍</td>
+                </tr>
+                <tr>
+                    <td><strong>职位覆盖</strong></td>
+                    <td>基础聚合</td>
+                    <td>10-20 倍</td>
+                    <td>10-20 倍</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="data-note">
+            <strong>数据标注：</strong>Héra AI 数据为产品目标或内测数据，需在正式上线后验证。
+        </div>
+    </div>
+
+    <!-- 第二章 续：视频演示 -->
+    <div class="page">
+        <h1 class="chapter-title">第二章 变革：AI 时代的范式转移（续）</h1>
+
+        <h2 class="section-title">2.3 视频演示：AI 时代的招聘场景</h2>
+
+        <div class="scene-container vertical">
+            <div class="scene-video">
+                <div class="video-wrapper">
+                    <video controls poster="">
+                        <source src="hera-demo-final.mp4" type="video/mp4">
+                        您的浏览器不支持视频播放，请使用 Chrome 或 Safari 打开此文档。
+                    </video>
+                </div>
+            </div>
+            <div class="scene-content">
+                <div class="scene-character">
+                    <div class="scene-avatar">R</div>
+                    <div class="scene-character-info">
+                        <h4>Robert Grant</h4>
+                        <div class="role">Senior Full-Stack Engineer · AI Early Adopter</div>
+                    </div>
+                </div>
+                <div class="scene-narrative">
+                    <p>Robert is a full-stack engineer with 8 years of experience and a geek。AI Agent 在他的生活中早已习以为常——从自动化日常任务到优化工作流，他习惯让 AI 处理重复劳动，自己专注于创造性问题。</p>
+                    <p>The video on the left shows Robert using his Personal Agent to find a job。Héra uses AI Agents to push the most suitable positions to every job seeker——这个"合适"不仅仅是工作技能的匹配，还包含了职位的鲜活度、竞争热度、个人能力偏好等多维度评估。比起旧模式下求职者需要自己去网上搜索、查阅、比对，效率简直是飞跃。更重要的是，Héra 让找工作不再是大海捞针——每次推送都是经过智能筛选的优质机会。</p>
+                </div>
+                <div class="scene-hera-role">
+                    <strong>Héra's Role:</strong>Robert's Personal Career Agent。它不是"投简历的工具"，而是真正理解 Robert 技术栈、项目经验和职业偏好的 AI 伙伴——帮他发现那些"看起来不匹配但实际上很适合"的机会，并用工程师的语言把他的价值讲清楚。
+                </div>
+                <div class="scene-meta">
+                    Duration: 2:30 | Robert received first interview on Day 11, offer on Day 18
+                </div>
+            </div>
+        </div>
+
+        <div class="scene-container horizontal">
+            <div class="scene-video">
+                <div class="video-wrapper">
+                    <video controls poster="">
+                        <source src="hera-recruiting-final.mp4" type="video/mp4">
+                        您的浏览器不支持视频播放，请使用 Chrome 或 Safari 打开此文档。
+                    </video>
+                </div>
+            </div>
+            <div class="scene-content">
+                <div class="scene-character">
+                    <div class="scene-avatar" style="background: linear-gradient(135deg, #059669 0%, #047857 100%);">J</div>
+                    <div class="scene-character-info">
+                        <h4>Jennifer Morrison</h4>
+                        <div class="role">Head of Talent · Series B Startup</div>
+                    </div>
+                </div>
+                <div class="scene-narrative">
+                    <p>Jennifer is a Head of Talent at a Series B tech company，管理着一个 8 人的招聘团队。她的公司正处于快速扩张期，对人才的需求持续增长。</p>
+                    <p>The video above demonstrates Héra's strategic capabilities：Jennifer 的 Agent 通过公司的战略发展和人事变动，主动给她推送了人才需求预警——某个关键岗位可能在未来 2 个月内出现空缺。Jennifer 需要做的只是决定何时启动招聘。她通过 Agent 调用 Héra，得知这个职位目前在招聘市场上的热度，果断决定立即启动招聘流程。</p>
+                    <p>整个招聘过程也远不像传统模式那样需要在各个招聘网站上发布职位信息。现在 Jennifer 只要告诉她的 Agent，Agent 就能通过 Héra 直接与候选人的 Agent 联系推荐，并通过 Héra 评估候选人的匹配度——从"发布 - 等待 - 筛选"变成了"主动 - 匹配 - 确认"。</p>
+                </div>
+                <div class="scene-hera-role">
+                    <strong>Héra's Role:</strong>Jennifer's Strategic Hiring Partner。它不是被动的"简历筛选工具"，而是主动的"人才战略顾问"——提前预警人才需求、实时分析市场热度、自动对接候选人 Agent，让招聘从"事后响应"变成"事前规划"，从"人找职位"变成"职位找人"。
+                </div>
+                <div class="scene-meta">
+                    Duration: 3:45 | Jennifer's team reduced hiring cycle from 38 to 16 days
+                </div>
+            </div>
+        </div>
+
+        <div class="insight-box">
+            <div class="insight-label">本章核心结论</div>
+            <div class="insight-content">
+                AI 时代的招聘不是"更快的传统招聘"，而是"完全不同的招聘"。Héra 的目标不是成为"更好的 SEEK"，而是成为"招聘基础设施"。
+            </div>
+        </div>
+    </div>
+
+    <!-- 第三章 -->
+    <div class="page">
+        <h1 class="chapter-title">第三章 预见：未来工作的三种形态</h1>
+
+        <h2 class="section-title">3.1 三阶段演进路线图</h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>阶段</th>
+                    <th>时间</th>
+                    <th>特征</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>AI 辅助</strong></td>
+                    <td>2026-2028</td>
+                    <td>AI 是工具，人是主导</td>
+                </tr>
+                <tr>
+                    <td><strong>AI 协同</strong></td>
+                    <td>2029-2032</td>
+                    <td>AI 与人是合作伙伴</td>
+                </tr>
+                <tr>
+                    <td><strong>Skills 市场</strong></td>
+                    <td>2033+</td>
+                    <td>不是"雇佣人"，是"购买 Skills"</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2 class="section-title">3.2 Skills 市场：工作本质的重构</h2>
+
+        <div class="content-card">
+            <div class="content-card-title">未来工作形态</div>
+            <div class="content-card-content">
+                <p><strong>传统：</strong>公司雇佣张三（全职，15 万美元/年）→ 张三做 A、B、C 三项工作 → 只有 60% 时间做核心工作</p>
+                <p><strong>未来：</strong>公司购买"张三的 Skills" → Skills A 用于项目 X（3 万美元）+ Skills B 用于项目 Y（2 万美元）+ Skills C 用于项目 Z（2.5 万美元）→ 张三同时服务 5 家公司，年收入 28 万美元+</p>
+            </div>
+        </div>
+
+        <div class="insight-box">
+            <div class="insight-label">核心观点</div>
+            <div class="insight-content">
+                Skills 市场不是"零工经济 2.0"，而是"工作本质的重构"。工作不再是"你是谁"（某公司员工），而是"你能做什么"（可验证的技能组合）。
+            </div>
+        </div>
+
+        <div class="insight-box">
+            <div class="insight-label">本章核心结论</div>
+            <div class="insight-content">
+                未来不是"AI 替代人"，而是"工作形态的重构"。从"全职雇佣"到"技能购买"，Héra 的愿景是成为这个新生态的基础设施。
+            </div>
+        </div>
+    </div>
+
+    <!-- 第四章 -->
+    <div class="page">
+        <h1 class="chapter-title">第四章 定位：Héra 是谁</h1>
+
+        <h2 class="section-title">4.1 三层定位：从产品到生态</h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>层级</th>
+                    <th>定位</th>
+                    <th>对标</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>表层</strong></td>
+                    <td>智能求职/招聘平台</td>
+                    <td>SEEK/LinkedIn AI 版</td>
+                </tr>
+                <tr>
+                    <td><strong>中层</strong></td>
+                    <td>职位与人才 Auto Match Tools</td>
+                    <td>Hugging Face</td>
+                </tr>
+                <tr>
+                    <td><strong>深层</strong></td>
+                    <td>企业需求匹配基础设施</td>
+                    <td>GitHub</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2 class="section-title">4.2 C 端核心价值</h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>功能</th>
+                    <th>效率提升</th>
+                    <th>用户价值</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>智能匹配</strong></td>
+                    <td>7-30 倍速度</td>
+                    <td>不再错过好职位</td>
+                </tr>
+                <tr>
+                    <td><strong>自动投递</strong></td>
+                    <td>90 倍效率</td>
+                    <td>日投递从 10 到 500+</td>
+                </tr>
+                <tr>
+                    <td><strong>CV 优化</strong></td>
+                    <td>4-6 倍响应率</td>
+                    <td>从石沉大海到有回音</td>
+                </tr>
+                <tr>
+                    <td><strong>进度跟踪</strong></td>
+                    <td>100% 可见性</td>
+                    <td>不再焦虑等待</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="insight-box">
+            <div class="insight-label">用户价值总结</div>
+            <div class="insight-content">
+                <strong>时间：</strong>从 6-12 周缩短到 1-2 周<br>
+                <strong>成本：</strong>从 3,500-8,000 美元降到 27.99 美元/月<br>
+                <strong>结果：</strong>从 1-2% 提升到 20-30%<br>
+                <strong>体验：</strong>从焦虑内耗到掌控感
+            </div>
+        </div>
+    </div>
+
+    <!-- 第四章 续 -->
+    <div class="page">
+        <h1 class="chapter-title">第四章 定位：Héra 是谁（续）</h1>
+
+        <h2 class="section-title">4.3 商业模式与单位经济</h2>
+
+        <h3>收入来源</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>阶段</th>
+                    <th>C 端</th>
+                    <th>B 端</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>短期（0-18 月）</strong></td>
+                    <td>27.99 美元/月订阅</td>
+                    <td>免费获客</td>
+                </tr>
+                <tr>
+                    <td><strong>中期（18-36 月）</strong></td>
+                    <td>订阅 + 增值</td>
+                    <td>API 分成</td>
+                </tr>
+                <tr>
+                    <td><strong>长期（36 月+）</strong></td>
+                    <td>Skills 市场抽成</td>
+                    <td>Skills 市场抽成</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>单位经济（C 端）</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>指标</th>
+                    <th>数值</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>获客成本（CAC）</strong></td>
+                    <td>50-100 美元</td>
+                </tr>
+                <tr>
+                    <td><strong>生命周期价值（LTV）</strong></td>
+                    <td>300-500 美元</td>
+                </tr>
+                <tr>
+                    <td><strong>LTV/CAC</strong></td>
+                    <td>3-5 倍（健康）</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="insight-box">
+            <div class="insight-label">本章核心结论</div>
+            <div class="insight-content">
+                Héra 不是"招聘平台"，而是"招聘基础设施"。商业模式创新（API 经济）与技术创新（AI 匹配）相结合，创造可持续竞争优势。
+            </div>
+        </div>
+    </div>
+
+    <!-- 第五章 -->
+    <div class="page">
+        <h1 class="chapter-title">第五章 前景：AI 时代的机遇</h1>
+
+        <h2 class="section-title">5.1 历史视角：技术革命与就业</h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>革命</th>
+                    <th>当时的恐惧</th>
+                    <th>实际结果</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>工业革命</strong></td>
+                    <td>机器替代工人</td>
+                    <td>创造工厂工人、工程师等新岗位</td>
+                </tr>
+                <tr>
+                    <td><strong>计算机革命</strong></td>
+                    <td>电脑替代白领</td>
+                    <td>创造程序员、数据分析师等岗位</td>
+                </tr>
+                <tr>
+                    <td><strong>互联网革命</strong></td>
+                    <td>线上替代线下</td>
+                    <td>创造电商、社交媒体等新行业</td>
+                </tr>
+                <tr>
+                    <td><strong>AI 革命</strong></td>
+                    <td>AI 替代人</td>
+                    <td>正在创造 AI 训练师等新岗位</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="insight-box">
+            <div class="insight-label">历史规律</div>
+            <div class="insight-content">
+                技术消灭的是任务，不是工作。新工作会诞生，只是我们还没想到名字。
+            </div>
+        </div>
+
+        <h2 class="section-title">5.2 Héra 的护城河：企业需求</h2>
+
+        <div class="insight-box">
+            <div class="insight-label">重新定义 Héra</div>
+            <div class="insight-content">
+                Héra 的真正护城河不是"招聘"，而是"企业需求"。只要企业还有需求，Héra 就有市场。执行者是人、是 AI、是 Skills Agent，对 Héra 来说只是技术细节。
+            </div>
+        </div>
+
+        <div class="insight-box">
+            <div class="insight-label">本章核心结论</div>
+            <div class="insight-content">
+                AI 不会让 Héra 消失，反而会让 Héra 更重要。企业需求永远存在，Héra 的市场就永远存在。
+            </div>
+        </div>
+    </div>
+
+    <!-- 第六章 -->
+    <div class="page">
+        <h1 class="chapter-title">第六章 优势：为什么是 Héra</h1>
+
+        <h2 class="section-title">6.1 为什么不是 SEEK/LinkedIn</h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>维度</th>
+                    <th>SEEK/LinkedIn</th>
+                    <th>Héra</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>收入来源</strong></td>
+                    <td>发布费</td>
+                    <td>API 分成</td>
+                </tr>
+                <tr>
+                    <td><strong>激励机制</strong></td>
+                    <td>多发职位</td>
+                    <td>成功匹配</td>
+                </tr>
+                <tr>
+                    <td><strong>技术债务</strong></td>
+                    <td>10-20 年老系统</td>
+                    <td>从零开始，AI 原生</td>
+                </tr>
+                <tr>
+                    <td><strong>决策速度</strong></td>
+                    <td>上市公司财报压力</td>
+                    <td>创业公司长期主义</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="insight-box">
+            <div class="insight-label">核心观点</div>
+            <div class="insight-content">
+                在位者的优势是它们的劣势。它们的收入来源、技术架构、组织能力都是为了旧时代设计的，无法适应新时代。
+            </div>
+        </div>
+
+        <h2 class="section-title">6.2 Héra 的独特优势</h2>
+
+        <div class="content-card">
+            <div class="content-card-content">
+                <p><strong>1. 职位覆盖（10-20 倍）</strong><br>
+                传统：只聚合已发布职位<br>
+                Héra：深度抓取 + 企业直招 = 500 万+ 每日活跃职位</p>
+                <p style="margin-top: 15px;"><strong>2. 人为干预（打破时间壁垒）</strong><br>
+                传统：好职位 24 小时内被抢光<br>
+                Héra：24 小时内推荐 + 强行 CV 匹配</p>
+                <p style="margin-top: 15px;"><strong>3. 自动化程度（95% 流程）</strong><br>
+                传统：人手动填写 15 分钟/次<br>
+                Héra：AI 自动填写 10 秒/次</p>
+                <p style="margin-top: 15px;"><strong>4. 数据护城河</strong><br>
+                越多用户 → 数据越准 → 匹配越好 → 更多用户</p>
+            </div>
+        </div>
+
+        <div class="insight-box">
+            <div class="insight-label">本章核心结论</div>
+            <div class="insight-content">
+                Héra 的优势是多维度组合——商业模式、技术架构、数据积累、领域知识、团队能力，形成可持续竞争壁垒。
+            </div>
+        </div>
+    </div>
+
+    <!-- 第七章 -->
+    <div class="page">
+        <h1 class="chapter-title">Chapter 7: Action</h1>
+
+        <h2 class="section-title">7.1 Financing</h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>项目</th>
+                    <th>详情</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>融资金额</strong></td>
+                    <td>待定</td>
+                </tr>
+                <tr>
+                    <td><strong>估值</strong></td>
+                    <td>待定</td>
+                </tr>
+                <tr>
+                    <td><strong>跑道</strong></td>
+                    <td>18 个月</td>
+                </tr>
+                <tr>
+                    <td><strong>资金用途</strong></td>
+                    <td>50% 研发，30% 市场，20% 运营</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>里程碑</h3>
+        <ul>
+            <li>事件 1</li>
+            <li>事件 2</li>
+            <li>事件 3</li>
+            <li>事件 4</li>
+        </ul>
+
+    </div>
+
+    <!-- 第七章 续 -->
+    <div class="page">
+        <h1 class="chapter-title">Chapter 7: Action（续）</h1>
+
+        <h2 class="section-title">7.2 Next Steps</h2>
+
+        <h3>短期</h3>
+        <ul>
+            <li>事件 1</li>
+            <li>事件 2</li>
+            <li>事件 3</li>
+            <li>事件 4</li>
+        </ul>
+
+        <h3>中期</h3>
+        <ul>
+            <li>事件 5</li>
+            <li>事件 6</li>
+            <li>开始 Phase 1 验证（用户访谈）</li>
+        </ul>
+
+        <div class="insight-box">
+            <div class="insight-label">联系与演示</div>
+            <div class="insight-content">
+                <strong>演示文件位置：</strong>/Users/rusben/Desktop/Hera/<br>
+                <strong>推荐演示：</strong>HERA_BP_原风格完整版.html<br>
+                <strong>视频文件：</strong>hera-demo-final.mp4 + hera-recruiting-final.mp4
+            </div>
+        </div>
+    </div>
+
+    <!-- 附录 -->
+    <div class="page">
+        <h1 class="chapter-title">Appendix: Data Sources</h1>
+
+        <div class="appendix">
+            <h2 class="appendix-title">数据可信度分布（截至 2026-02-28）</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>可信度</th>
+                        <th>数量</th>
+                        <th>占比</th>
+                        <th>说明</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>高</strong></td>
+                        <td>1</td>
+                        <td>6.7%</td>
+                        <td>BLS 官方数据（求职周期 22.3 周）</td>
+                    </tr>
+                    <tr>
+                        <td><strong>中</strong></td>
+                        <td>4</td>
+                        <td>26.7%</td>
+                        <td>行业惯例/公开定价（发布费、猎头费、求职成本）</td>
+                    </tr>
+                    <tr>
+                        <td><strong>低</strong></td>
+                        <td>2</td>
+                        <td>13.3%</td>
+                        <td>可能混淆概念（HR 筛选成本、市场规模）</td>
+                    </tr>
+                    <tr>
+                        <td><strong>待验证</strong></td>
+                        <td>3</td>
+                        <td>20%</td>
+                        <td>无权威来源（67% 跳转、24 小时抢光）</td>
+                    </tr>
+                    <tr>
+                        <td><strong>内部指标</strong></td>
+                        <td>5</td>
+                        <td>33.3%</td>
+                        <td>Héra 产品目标/定价（需上线后验证）</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p style="margin-top: 15px; font-size: 9pt; color: var(--text-light);">
+                <strong>查证说明：</strong>本次查证通过 BLS、SHRM、ABS 等官方机构数据验证了部分核心指标。
+                由于多个招聘统计网站（Jobscan、The Ladders、LinkedIn）采用 Cloudflare 防护，部分行业基准数据未能获取完整来源。
+                Héra 产品指标（推荐速度、投递效率、响应率等）为内测目标值，将在正式上线后发布实际运营报告。
+            </p>
+        </div>
+
+        <div class="appendix">
+            <h2 class="appendix-title">关键数据标注说明</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>数据类型</th>
+                        <th>标注方式</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>官方统计</strong></td>
+                        <td>[来源：机构名]</td>
+                    </tr>
+                    <tr>
+                        <td><strong>行业惯例</strong></td>
+                        <td>[行业估算]</td>
+                    </tr>
+                    <tr>
+                        <td><strong>产品目标</strong></td>
+                        <td>[目标]</td>
+                    </tr>
+                    <tr>
+                        <td><strong>待验证</strong></td>
+                        <td>[待验证]</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="insight-box">
+            <div class="insight-label">完整报告</div>
+            <div class="insight-content">
+                详见 HERA_BP_数据查证报告_v1.0.md
+            </div>
+        </div>
+    </div>
+
+    <!-- 页脚 -->
+    <div class="footer">
+        <span class="footer-logo">Héra AI</span>
+        <p>让每个人都被看见，让每个机会都被匹配</p>
+        <p>文档版本：v5.0 商务增强版 | 2026 年 2 月 28 日</p>
+        <p>保密级别：投资人专享 | 未经许可不得外传</p>
+    </div>
+
+    <!-- 打印提示 -->
+    <div class="no-print">
+        <div class="print-hint">
+            <h3>打印说明</h3>
+            <p>按 Ctrl+P (Windows) 或 Cmd+P (Mac) 打印</p>
+            <p>推荐设置：A4 | 无边距 | 背景图形</p>
+            <p>视频文件请确保与 HTML 文件在同一文件夹</p>
+        </div>
+    </div>
+</body>
+</html>
