@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>Héra 定价策略综合报告</title>
+<style>
+:root {
+  --primary: #4f46e5;
+  --primary-light: #818cf8;
+  --primary-dark: #3730a3;
+  --text: #1f2937;
+  --text-light: #6b7280;
+  --bg: #ffffff;
+  --bg-alt: #f9fafb;
+  --border: #e5e7eb;
+  --success: #059669;
+  --warning: #d97706;
+  --danger: #dc2626;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Helvetica Neue', STHeiti, 'Microsoft YaHei', sans-serif;
+  line-height: 1.75;
+  color: var(--text);
+  background: #f3f4f6;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+}
+
+.page {
+  max-width: 210mm;
+  margin: 0 auto;
+  background: var(--bg);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.content { padding: 40px 30px; }
+
+/* 封面 - 移动端优化 */
+.cover {
+  text-align: center;
+  padding: 60px 25px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+.cover h1 {
+  font-size: 26px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  line-height: 1.3;
+}
+
+.cover .subtitle {
+  font-size: 14px;
+  opacity: 0.9;
+  margin-bottom: 35px;
+  line-height: 1.5;
+}
+
+.cover .meta {
+  background: rgba(255,255,255,0.15);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  padding: 20px 25px;
+  border-radius: 10px;
+  display: inline-block;
+  text-align: left;
+  width: 100%;
+  max-width: 320px;
+}
+
+.cover .meta p {
+  margin: 6px 0;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+/* 目录 - 移动端优化 */
+.toc {
+  padding: 25px 20px;
+  background: var(--bg-alt);
+  border-bottom: 1px solid var(--border);
+}
+
+.toc h2 {
+  font-size: 18px;
+  color: var(--text);
+  margin-bottom: 15px;
+}
+
+.toc-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+  list-style: none;
+}
+
+.toc-grid a {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 14px;
+  background: white;
+  border-radius: 6px;
+  color: var(--text);
+  text-decoration: none;
+  font-size: 14px;
+  border: 1px solid var(--border);
+  transition: all 0.15s;
+  -webkit-touch-callout: none;
+}
+
+.toc-grid a:active {
+  background: var(--primary);
+  color: white;
+  border-color: var(--primary);
+  transform: scale(0.98);
+}
+
+/* 标题 */
+h1 {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text);
+  margin: 35px 0 18px 0;
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--primary);
+}
+
+h1:first-of-type { margin-top: 20px; }
+
+h2 {
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--text);
+  margin: 25px 0 12px 0;
+  padding-left: 10px;
+  border-left: 3px solid var(--primary);
+}
+
+h3 {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text);
+  margin: 18px 0 10px 0;
+}
+
+/* 段落 */
+p { margin: 10px 0; }
+
+strong { color: var(--primary-dark); font-weight: 600; }
+
+/* 列表 */
+ul, ol { margin: 10px 0; padding-left: 20px; }
+li { margin: 6px 0; }
+
+/* 表格 - 移动端优化 */
+.table-wrapper {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin: 15px 0;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  background: white;
+  min-width: 500px;
+}
+
+thead th {
+  background: var(--primary);
+  color: white;
+  font-weight: 600;
+  padding: 10px 12px;
+  text-align: left;
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+tbody td {
+  padding: 9px 12px;
+  border-bottom: 1px solid var(--border);
+  font-size: 13px;
+}
+
+tbody tr:active { background: #f5f3ff; }
+tbody tr:last-child td { border-bottom: none; }
+tbody tr:nth-child(even) { background: var(--bg-alt); }
+
+/* ASCII 架构图 - 移动端优化 */
+pre {
+  font-family: 'SF Mono', 'Monaco', 'Menlo', 'Consolas', 'Courier New', monospace;
+  font-size: 10px;
+  line-height: 1.5;
+  background: #1e1e1e;
+  color: #d4d4d4;
+  border-radius: 6px;
+  padding: 14px;
+  margin: 15px 0;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border: 1px solid var(--border);
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  word-wrap: normal;
+  tab-size: 4;
+  hyphens: none;
+  min-width: 100%;
+}
+
+pre code {
+  font-family: inherit;
+  background: none;
+  padding: 0;
+  color: inherit;
+  font-size: inherit;
+}
+
+code {
+  font-family: 'SF Mono', 'Monaco', 'Menlo', 'Consolas', monospace;
+  background: var(--bg-alt);
+  padding: 2px 5px;
+  border-radius: 3px;
+  font-size: 12px;
+  color: var(--primary);
+  word-break: break-all;
+}
+
+/* 引用 */
+blockquote {
+  border-left: 3px solid var(--primary);
+  padding: 10px 14px;
+  margin: 15px 0;
+  background: var(--bg-alt);
+  color: var(--text-light);
+  border-radius: 0 6px 6px 0;
+}
+
+/* 分隔线 */
+hr {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 25px 0;
+}
+
+/* 链接 */
+a { color: var(--primary); text-decoration: none; }
+a:active { opacity: 0.7; }
+
+/* 特殊样式 */
+.summary-box {
+  background: linear-gradient(135deg, #f5f3ff 0%, #faf5ff 100%);
+  border: 1px solid var(--primary-light);
+  border-radius: 8px;
+  padding: 16px;
+  margin: 20px 0;
+}
+
+.summary-box h2 {
+  margin-top: 0;
+  border: none;
+  padding: 0;
+  color: var(--primary-dark);
+  font-size: 17px;
+}
+
+.risk-high { color: var(--danger); font-weight: 600; }
+.risk-medium { color: var(--warning); font-weight: 600; }
+.success { color: var(--success); font-weight: 600; }
+
+/* 底部 */
+.footer {
+  text-align: center;
+  margin-top: 40px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+  color: var(--text-light);
+  font-size: 12px;
+}
+
+.footer p { margin: 6px 0; }
+
+/* 打印 */
+@media print {
+  body { background: white; }
+  .page { margin: 0; box-shadow: none; }
+  .content { padding: 15mm; }
+  h1 { page-break-before: always; }
+  h1:first-of-type { page-break-before: avoid; }
+  table, tr, pre { page-break-inside: avoid; }
+  .cover { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  a { color: var(--text); text-decoration: none; }
+}
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="cover">
+    <h1>Héra 定价策略综合报告</h1>
+    <p class="subtitle">招聘垂类数据服务商业模型与定价分析</p>
+    <div class="meta">
+      <p><strong>版本：</strong>V3.7 移动版</p>
+      <p><strong>日期：</strong>2026 年 3 月 10 日</p>
+      <p><strong>保密级别：</strong>内部机密</p>
+      <p><strong>报告类型：</strong>定价策略决策报告</p>
+    </div>
+  </div>
+
+  <div class="toc">
+    <h2>目录</h2>
+    <ul class="toc-grid">
+      <li><a href="#executive-summary"><span>执行摘要</span><span>1</span></a></li>
+      <li><a href="#section-1"><span>1. 报告目的</span><span>2</span></a></li>
+      <li><a href="#section-2"><span>2. 公司及产品定位</span><span>3</span></a></li>
+      <li><a href="#section-3"><span>3. 技术方案</span><span>5</span></a></li>
+      <li><a href="#section-4"><span>4. 定价理论</span><span>10</span></a></li>
+      <li><a href="#section-5"><span>5. 价格矩阵</span><span>12</span></a></li>
+      <li><a href="#section-6"><span>6. 竞争力分析</span><span>15</span></a></li>
+      <li><a href="#section-7"><span>7. 建议</span><span>17</span></a></li>
+      <li><a href="#section-8"><span>8. 风险评估</span><span>19</span></a></li>
+      <li><a href="#section-9"><span>9. 实施路线图</span><span>20</span></a></li>
+      <li><a href="#section-10"><span>10. 理论模型</span><span>21</span></a></li>
+      <li><a href="#section-11"><span>11. 财务模型</span><span>23</span></a></li>
+      <li><a href="#section-12"><span>12. 行动清单</span><span>25</span></a></li>
+      <li><a href="#section-13"><span>13. 补充资料</span><span>26</span></a></li>
+    </ul>
+  </div>
+
+  <div class="content">
+    <div id="executive-summary">
+      <h1>执行摘要</h1>
+      <div class="summary-box">
+        <h2>核心建议</h2>
+        <p>基于 Héra 当前状况（5M 日活职位、2-3 人团队、现金流未知），建议采用<strong>"数据授权（DL）先行 → API 服务（API）规模化"</strong>的两阶段策略。</p>
+      </div>
+      <h3>三大支撑论点</h3>
+      <div class="table-wrapper">
+        <table>
+          <thead><tr><th>论点</th><th>证据</th><th>含义</th></tr></thead>
+          <tbody>
+            <tr><td><strong>现金流友好</strong></td><td>数据授权启动资金仅 12 万美元，6 个月可上线产生收入</td><td>适合早期团队，降低资金压力</td></tr>
+            <tr><td><strong>需求验证</strong></td><td>通过数据授权快速验证客户 WTP，降低 API 模式投入风险</td><td>先验证再投入，避免盲目开发</td></tr>
+            <tr><td><strong>路径清晰</strong></td><td>数据授权客户可自然升级为 API 客户，获客成本摊薄</td><td>两阶段协同，非零和选择</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <h3>关键假设</h3>
+      <div class="table-wrapper">
+        <table>
+          <thead><tr><th>假设</th><th>验证方法</th><th>如不成立的备选方案</th></tr></thead>
+          <tbody>
+            <tr><td>6 个月内可签约 5-10 个数据授权客户</td><td>M2 末评审签约进度</td><td>如&lt;3 个客户，转向企业集成模式试点</td></tr>
+            <tr><td>12 个月内可完成 API 基础设施建设</td><td>M6 末评审技术进度</td><td>如延期&gt;4 周，分阶段上线核心功能</td></tr>
+            <tr><td>现金流能支撑 12 个月运营</td><td>每周现金流监控</td><td>如现金&lt;6 个月，寻求过桥融资</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <h3>主要风险</h3>
+      <div class="table-wrapper">
+        <table>
+          <thead><tr><th>风险</th><th>概率</th><th>影响</th><th>风险等级</th><th>应对方案</th></tr></thead>
+          <tbody>
+            <tr><td>客户 WTP 低于预期</td><td>中 (40%)</td><td>高</td><td class="risk-high">高</td><td>调整价格至$10K/年或转向企业集成模式</td></tr>
+            <tr><td>技术实施延期</td><td>中 (35%)</td><td>中</td><td class="risk-medium">中</td><td>分阶段上线，优先核心功能</td></tr>
+            <tr><td>现金流断裂</td><td>低 (20%)</td><td>高</td><td class="risk-high">高</td><td>预留 6 个月运营资金</td></tr>
+            <tr><td>数据源被封禁</td><td>中 (30%)</td><td>高</td><td class="risk-high">高</td><td>多 IP 轮换 + 建立备用数据源</td></tr>
+            <tr><td>竞争对手跟进</td><td>高 (60%)</td><td>中</td><td class="risk-medium">中</td><td>快速建立客户壁垒 + 持续迭代</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <h3>财务预测概览</h3>
+      <div class="table-wrapper">
+        <table>
+          <thead><tr><th>指标</th><th>第 1 年</th><th>第 2 年</th><th>第 3 年</th></tr></thead>
+          <tbody>
+            <tr><td><strong>总收入</strong></td><td>$60 万</td><td>$360 万</td><td>$1,200 万</td></tr>
+            <tr><td><strong>毛利率</strong></td><td>10%</td><td>67%</td><td>78%</td></tr>
+            <tr><td><strong>客户数</strong></td><td>10</td><td>50</td><td>150</td></tr>
+            <tr><td><strong>净利润</strong></td><td>$6 万</td><td>$240 万</td><td>$936 万</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <h3>需要立即决策的事项（本周内）</h3>
+      <div class="table-wrapper">
+        <table>
+          <thead><tr><th>决策事项</th><th>选项</th><th>推荐</th><th>理由</th><th>截止时间</th></tr></thead>
+          <tbody>
+            <tr><td><strong>商业模式选择</strong></td><td>A. 数据授权先行<br>B. API 直接上线<br>C. 三模式并行</td><td class="success">A</td><td>现金流友好，风险最低</td><td>本周五</td></tr>
+            <tr><td><strong>启动资金审批</strong></td><td>A. $12 万（DL only）<br>B. $75 万（DL+API）<br>C. $150 万（全模式）</td><td class="success">B</td><td>支撑 12 个月运营</td><td>本周五</td></tr>
+            <tr><td><strong>团队扩张计划</strong></td><td>A. 维持 2-3 人<br>B. 扩至 6 人<br>C. 扩至 13 人</td><td class="success">B</td><td>支撑 API 开发</td><td>下周</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div id="section-1">
+      <h1>1. 报告目的</h1>
+      <h2>1.1 报告定位</h2>
+      <p>本报告旨在为 Héra 项目的定价决策提供<strong>决策工具</strong>，而非仅信息参考。</p>
+      <p><strong>核心原则：</strong></p>
+      <ul>
+        <li>无论公司最终选择哪种商业模式（数据授权 / API 服务 / 企业集成），本报告都能提供该模式下的最优定价模型</li>
+        <li>报告呈现<strong>客观事实</strong>和<strong>多维分析</strong>，由决策者基于自身情况判断</li>
+        <li>报告包含<strong>明确建议</strong>和<strong>行动计划</strong>，支持快速决策</li>
+      </ul>
+      <h2>1.2 报告要回答的问题</h2>
+      <div class="table-wrapper">
+        <table>
+          <thead><tr><th>问题类型</th><th>具体问题</th></tr></thead>
+          <tbody>
+            <tr><td><strong>有哪些可行方案？</strong></td><td>数据授权 / API 服务 / 企业集成三种模式的定义和区别</td></tr>
+            <tr><td><strong>技术要求是什么？</strong></td><td>每种模式对应的完整技术方案、技术难点、资源要求</td></tr>
+            <tr><td><strong>成本结构是什么？</strong></td><td>每种模式的固定成本、边际成本、持续运维成本</td></tr>
+            <tr><td><strong>市场价格区间是什么？</strong></td><td>同业竞争对手的价格水平和定价逻辑</td></tr>
+            <tr><td><strong>财务模型是什么？</strong></td><td>每种模式的盈亏平衡点、收入预测、利润空间</td></tr>
+            <tr><td><strong>风险是什么？</strong></td><td>每种模式的主要风险及应对方案</td></tr>
+            <tr><td><strong>接下来做什么？</strong></td><td>90 天详细行动计划和里程碑</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <h2>1.3 报告不回答的问题</h2>
+      <ul>
+        <li>应该选哪种商业模式（由决策者基于现金流、团队能力、市场资源判断）</li>
+        <li>哪个方案"最好"（取决于公司目标和约束条件）</li>
+        <li>具体定价数字（报告提供价格区间和测算方法，具体数字需结合实际情况）</li>
+      </ul>
+      <h2>1.4 报告使用方法</h2>
+      <pre>决策者阅读路径（推荐）:
+1. 阅读执行摘要（2 分钟） → 了解核心建议和关键决策
+2. 阅读第 12 章行动清单（5 分钟） → 明确接下来做什么
+3. 阅读第 7 章建议（10 分钟） → 理解方案选择逻辑
+4. 根据需要查阅技术/定价/竞争力分析（按需）
+5. 参考附录了解理论模型和财务细节（按需）</pre>
+    </div>
+
+    <div id="section-2">
+      <h1>2. 公司及产品定位</h1>
+      <h2>2.1 Héra 产品定义</h2>
+      <p><strong>产品名称：</strong>Héra（招聘垂类数据服务商）</p>
+      <p><strong>核心产品：</strong>5M+ 日活职位招聘数据，覆盖北美 Top 2000 + 英/法/澳 Top 100 公司</p>
+      <h3>数据来源</h3>
+      <ul>
+        <li>ATS API 连接器（主要）</li>
+        <li>网络爬虫（备用）</li>
+        <li>合作伙伴数据交换（补充）</li>
+      </ul>
+      <h2>2.2 全场景下的经典商业模式</h2>
+      <div class="table-wrapper">
+        <table>
+          <thead><tr><th>模式</th><th>定义</th><th>代表公司</th><th>价格区间（USD/年）</th></tr></thead>
+          <tbody>
+            <tr><td><strong>数据授权（Data License）</strong></td><td>一次性数据文件交付，客户下载后自行使用</td><td>Bloomberg（数据授权）</td><td>$15,000 - $96,000</td></tr>
+            <tr><td><strong>API 服务（API-as-a-Service）</strong></td><td>REST API 接口，客户实时查询，按调用量计费</td><td>Twilio（API 服务）</td><td>$6,000 - $120,000</td></tr>
+            <tr><td><strong>企业集成（Enterprise Integration）</strong></td><td>深度集成到客户系统，定制开发 + 收入分成</td><td>Palantir（企业集成）</td><td>$100,000 - $1,000,000+</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div id="section-3">
+      <h1>3. 不同模式下的技术方案</h1>
+      <h2>3.1 数据授权（Data License）模式</h2>
+      <h3>完整技术方案</h3>
+      <pre>┌─────────────────────────────────────────────────────────┐
+│                    Data License 技术栈                   │
+├─────────────────────────────────────────────────────────┤
+│  数据获得                                                │
+│  ├── ATS API 连接器（Python + requests）                │
+│  ├── 网络爬虫（Scrapy/Playwright）                      │
+│  ├── 连接器健康监控（动态阈值 + 分级告警）              │
+│  └── 数据血缘追踪（哈希链）                             │
+├─────────────────────────────────────────────────────────┤
+│  数据存储                                                │
+│  ├── MongoDB 单节点（MVP）→ 3 节点副本集（生产）        │
+│  ├── 每日 S3 备份（7 天保留）                           │
+│  └── PII 自动扫描（正则 + NLP 双层检测）                │
+├─────────────────────────────────────────────────────────┤
+│  数据交付                                                │
+│  ├── S3 预签名 URL（主交付）                            │
+│  ├── SFTP 推送（备用交付）                              │
+│  └── Webhook 回调确认                                   │
+├─────────────────────────────────────────────────────────┤
+│  数据运维                                                │
+│  └── 无持续运维（一次性交付）                           │
+└─────────────────────────────────────────────────────────┘</pre>
+      <h2>3.2 API 服务（API-as-a-Service）模式</h2>
+      <h3>完整技术方案</h3>
+      <pre>┌─────────────────────────────────────────────────────────┐
+│                 API-as-a-Service 技术栈                  │
+├─────────────────────────────────────────────────────────┤
+│  数据获得（同 Data License）                             │
+│  ├── ATS API 连接器                                     │
+│  ├── 网络爬虫                                           │
+│  ├── 连接器健康监控                                     │
+│  └── 数据血缘追踪                                       │
+├─────────────────────────────────────────────────────────┤
+│  API 服务层                                              │
+│  ├── API Gateway（AWS API Gateway → Kong）             │
+│  ├── 鉴权系统（JWT + OAuth2）                          │
+│  ├── 计量计费系统（按调用量）                          │
+│  ├── 熔断器（pybreaker 自适应）                        │
+│  └── 限流系统（令牌桶算法）                            │
+├─────────────────────────────────────────────────────────┤
+│  数据存储                                                │
+│  ├── MongoDB + Elasticsearch（搜索优化）               │
+│  ├── Redis Cluster（缓存层）                           │
+│  └── 备份策略（MongoDB 6h/ES 每日/Redis 每小时）        │
+├─────────────────────────────────────────────────────────┤
+│  监控运维                                                │
+│  ├── 分布式追踪（Jaeger + OpenTelemetry）              │
+│  ├── 合成监控（关键业务场景测试）                      │
+│  ├── 错误预算政策（99% SLA = 7.2h/月）                 │
+│  └── 24/7 on-call 轮班（4 人团队）                      │
+└─────────────────────────────────────────────────────────┘</pre>
+      <h2>3.3 企业集成（Enterprise Integration）模式</h2>
+      <h3>完整技术方案</h3>
+      <pre>┌─────────────────────────────────────────────────────────┐
+│               Enterprise Integration 技术栈              │
+├─────────────────────────────────────────────────────────┤
+│  数据获得（同 Data License + 定制数据源）                │
+│  ├── ATS API 连接器                                     │
+│  ├── 网络爬虫                                           │
+│  ├── 专属数据源（客户指定）                            │
+│  └── 数据定制清洗                                       │
+├─────────────────────────────────────────────────────────┤
+│  接入层                                                  │
+│  ├── 零信任架构（mTLS + 持续验证）                     │
+│  ├── AWS Direct Connect 专线（1Gbps → 10Gbps）         │
+│  ├── 专属 API 端点（隔离部署）                         │
+│  └── IP 白名单 + 证书绑定                               │
+├─────────────────────────────────────────────────────────┤
+│  安全合规                                                │
+│  ├── 双层加密（数据库 + 应用层）                       │
+│  ├── 密钥管理（HashiCorp Vault + 自动轮换）            │
+│  ├── 审计日志（S3 Object Lock + SIEM 集成）            │
+│  ├── SOC 2 Type II 认证（6-10 周）                      │
+│  └── ISO 27001 认证（6-8 周）                           │
+├─────────────────────────────────────────────────────────┤
+│  运维支撑                                                │
+│  ├── 99.9% SLA（43 分钟/月允许停机）                   │
+│  ├── 专属运维团队（3 人）                               │
+│  ├── 每日收入对账（&gt;1% 差异告警）                      │
+│  └── 专属客户经理（24/7 支持）                         │
+└─────────────────────────────────────────────────────────┘</pre>
+      <h3>技术方案对比总表</h3>
+      <div class="table-wrapper">
+        <table>
+          <thead><tr><th>维度</th><th>数据授权（DL）</th><th>API 服务（API）</th><th>企业集成（EI）</th></tr></thead>
+          <tbody>
+            <tr><td><strong>启动资金</strong></td><td>12 万美元</td><td>75 万美元</td><td>150 万美元</td></tr>
+            <tr><td><strong>首年成本</strong></td><td>12.3 万美元</td><td>78.4 万美元</td><td>148.8 万美元</td></tr>
+            <tr><td><strong>团队规模</strong></td><td>2-3 人</td><td>6 人</td><td>13 人</td></tr>
+            <tr><td><strong>实施周期</strong></td><td>6 个月</td><td>6 个月</td><td>9 个月</td></tr>
+            <tr><td><strong>毛利率</strong></td><td>85%</td><td>70%</td><td>60%</td></tr>
+            <tr><td><strong>规模化难度</strong></td><td>低</td><td>中</td><td>高</td></tr>
+            <tr><td><strong>竞争壁垒</strong></td><td>中（5M+ 数据）</td><td>高（API 生态）</td><td>极高（深度集成）</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div id="section-4">
+      <h1>4. 定价的理论依据</h1>
+      <h2>4.1 Simon-Kucher 价格三部曲理论</h2>
+      <div class="table-wrapper">
+        <table>
+          <thead><tr><th>定价策略</th><th>定义</th><th>适用场景</th><th>SKP 观点</th></tr></thead>
+          <tbody>
+            <tr><td><strong>成本导向定价</strong></td><td>基于生产成本 + 目标利润率</td><td>商品化程度高、差异化小的产品</td><td>仅作为底线参考</td></tr>
+            <tr><td><strong>竞争导向定价</strong></td><td>根据竞争对手价格水平设定</td><td>高度竞争市场、产品同质化严重</td><td>需结合竞争分析</td></tr>
+            <tr><td><strong>价值导向定价</strong></td><td>基于客户感知价值设定</td><td>差异化明显、创新性解决方案</td><td><strong>最理想策略</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Héra 采用<strong>价值导向定价</strong>作为核心策略，理由：差异化优势明显（5M+ 职位覆盖，18 维度职位描述，公司信息独有）、目标客户支付能力强（大模型公司 B 轮+，估值$100M+）、成本结构不透明（数据获取成本难以精确计算）。</p>
+      <hr>
+      <h2>4.2 价格瀑布模型（Price Waterfall）</h2>
+      <pre>标价 (List Price)
+    ↓
+├── 折扣 (Discounts)
+    ↓
+├── 促销 (Promotions)
+    ↓
+├── 返利 (Rebates)
+    ↓
+├── 物流成本 (Logistics Costs)
+    ↓
+├── 付款条件 (Payment Terms)
+    ↓
+实际净收入 (Net Realized Revenue)</pre>
+      <p><strong>关键洞察</strong>：企业平均只能实现标价的 50-70%，30-50% 的收入在瀑布中流失。</p>
+    </div>
+
+    <div id="section-5">
+      <h1>5. 不同商业模式下的价格矩阵</h1>
+      <h2>5.1 数据授权（Data License）模式价格矩阵</h2>
+      <h3>Good-Better-Best 三级定价</h3>
+      <div class="table-wrapper">
+        <table>
+          <thead><tr><th>版本</th><th>Good (基础版)</th><th>Better (专业版)</th><th>Best (企业版)</th></tr></thead>
+          <tbody>
+            <tr><td><strong>价格</strong></td><td>$15,000/年</td><td>$25,000/年</td><td>$45,000/年</td></tr>
+            <tr><td><strong>数据量</strong></td><td>50 万/月</td><td>200 万/月</td><td>500 万+/月</td></tr>
+            <tr><td><strong>更新频率</strong></td><td>T+7 天</td><td>T+3 天</td><td>T+1 天（24H）</td></tr>
+            <tr><td><strong>用户数</strong></td><td>1</td><td>5</td><td>不限</td></tr>
+            <tr><td><strong>数据字段</strong></td><td>基础字段（8 维）</td><td>扩展字段（12 维）</td><td>全字段（18 维）+ 公司信息</td></tr>
+            <tr><td><strong>价格锚点</strong></td><td>-</td><td>+67% vs Good</td><td>+80% vs Better</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <hr>
+      <h2>5.2 API 服务（API-as-a-Service）模式价格矩阵</h2>
+      <h3>Good-Better-Best 三级定价</h3>
+      <div class="table-wrapper">
+        <table>
+          <thead><tr><th>版本</th><th>Good (开发者)</th><th>Better (成长)</th><th>Best (企业)</th></tr></thead>
+          <tbody>
+            <tr><td><strong>价格</strong></td><td>$500/月</td><td>$1,500/月</td><td>$5,000/月</td></tr>
+            <tr><td><strong>包含调用</strong></td><td>10 万次</td><td>50 万次</td><td>200 万次</td></tr>
+            <tr><td><strong>超额单价</strong></td><td>$0.015/次</td><td>$0.010/次</td><td>$0.007/次</td></tr>
+            <tr><td><strong>SLA</strong></td><td>99%</td><td>99.5%</td><td>99.9%</td></tr>
+            <tr><td><strong>支持</strong></td><td>邮件</td><td>电话 + 邮件</td><td>专属客户经理</td></tr>
+            <tr><td><strong>价格锚点</strong></td><td>-</td><td>+200% vs Good</td><td>+233% vs Better</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <hr>
+      <h2>5.3 企业集成（Enterprise Integration）模式价格矩阵</h2>
+      <h3>Good-Better-Best 三级定价</h3>
+      <div class="table-wrapper">
+        <table>
+          <thead><tr><th>版本</th><th>Good (启动)</th><th>Better (标准)</th><th>Best (战略)</th></tr></thead>
+          <tbody>
+            <tr><td><strong>底费</strong></td><td>$100,000/年</td><td>$300,000/年</td><td>$800,000/年</td></tr>
+            <tr><td><strong>分成比例</strong></td><td>25%</td><td>20%</td><td>15%</td></tr>
+            <tr><td><strong>最低收入</strong></td><td>$1M</td><td>$5M</td><td>$10M</td></tr>
+            <tr><td><strong>定制开发</strong></td><td>基础集成</td><td>深度定制</td><td>专属数据源 + 定制维度</td></tr>
+            <tr><td><strong>支持级别</strong></td><td>标准</td><td>优先</td><td>24/7 专属 + 驻场</td></tr>
+            <tr><td><strong>价格锚点</strong></td><td>-</td><td>+200% vs Good</td><td>+167% vs Better</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div id="section-6">
+      <h1>6. 竞争力分析</h1>
+      <h2>竞争对手价格总表</h2>
+      <div class="table-wrapper">
+        <table>
+          <thead><tr><th>公司</th><th>类型</th><th>定价模式</th><th>价格范围 (USD/年)</th></tr></thead>
+          <tbody>
+            <tr><td><strong>LinkedIn Recruiter</strong></td><td>综合</td><td>订阅制</td><td>$8,000 - $12,000</td></tr>
+            <tr><td><strong>Indeed Employer</strong></td><td>综合</td><td>按次付费</td><td>$0 - $5,000+</td></tr>
+            <tr><td><strong>Glassdoor</strong></td><td>综合</td><td>订阅制</td><td>$3,000 - $8,000</td></tr>
+            <tr><td><strong>AngelList Talent</strong></td><td>技术</td><td>订阅制</td><td>$2,500 - $5,000</td></tr>
+            <tr><td><strong>Hired.com</strong></td><td>技术</td><td>分成制</td><td>15-25% 年薪</td></tr>
+            <tr><td><strong>Robert Walters</strong></td><td>猎头</td><td>分成制</td><td>20-30% 年薪</td></tr>
+            <tr><td><strong>Eightfold AI</strong></td><td>AI</td><td>订阅制</td><td>$100,000 - $500,000</td></tr>
+            <tr><td><strong>HireVue</strong></td><td>AI</td><td>订阅制</td><td>$35,000 - $150,000</td></tr>
+            <tr><td><strong>Bloomberg</strong></td><td>数据</td><td>授权制</td><td>$24,000/终端/年</td></tr>
+            <tr><td><strong>Twilio</strong></td><td>API</td><td>按量付费</td><td>$0.0075/次</td></tr>
+            <tr><td><strong>Palantir</strong></td><td>集成</td><td>年框 + 定制</td><td>$500-1,000 万/年</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <h2>Héra 差异化价值主张</h2>
+      <div class="table-wrapper">
+        <table>
+          <thead><tr><th>维度</th><th>Héra</th><th>传统平台</th><th>价值倍数</th></tr></thead>
+          <tbody>
+            <tr><td><strong>日活职位</strong></td><td>5M+（500 万+）</td><td>0.5M-2M</td><td>2.5-10×</td></tr>
+            <tr><td><strong>公司覆盖</strong></td><td>北美 Top 2000 + 英/法/澳 Top 100</td><td>单一平台/区域</td><td>10-20×</td></tr>
+            <tr><td><strong>职位描述维度</strong></td><td>18+ 维度</td><td>5-8 维度</td><td>2-3×</td></tr>
+            <tr><td><strong>公司信息</strong></td><td>规模/总部/C-Level/最近 3 条新闻</td><td>基础信息</td><td>独有</td></tr>
+            <tr><td><strong>数据准确率</strong></td><td>&gt;98%</td><td>85-95%</td><td>1.03-1.15×</td></tr>
+            <tr><td><strong>刷新频率</strong></td><td>24H（T+1）</td><td>T+7 - T+30 天</td><td>7-30×</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <h2>竞争力 SWOT 分析</h2>
+      <div class="table-wrapper">
+        <table>
+          <thead><tr><th>维度</th><th>Héra</th></tr></thead>
+          <tbody>
+            <tr><td><strong>优势 (Strengths)</strong></td><td>5M+ 职位覆盖（2.5-10 倍竞品），18 维度职位描述，公司信息独有，T+1 刷新</td></tr>
+            <tr><td><strong>劣势 (Weaknesses)</strong></td><td>品牌知名度低，客户案例少，团队规模小，资金有限</td></tr>
+            <tr><td><strong>机会 (Opportunities)</strong></td><td>大模型公司招聘需求爆发，传统平台效率低，AI 招聘趋势</td></tr>
+            <tr><td><strong>威胁 (Threats)</strong></td><td>大厂自建爬虫，竞争对手跟进，数据合规政策风险</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div id="section-7">
+      <h1>7. 建议</h1>
+      <h2>7.1 不同情形下的方案选择</h2>
+      <div class="table-wrapper">
+        <table>
+          <thead><tr><th>情形</th><th>推荐方案</th><th>理由</th></tr></thead>
+          <tbody>
+            <tr><td><strong>现金流紧张 (&lt;6 个月)</strong></td><td>数据授权（DL）</td><td>启动资金低 (12 万)，快速产生现金流</td></tr>
+            <tr><td><strong>有技术无销售</strong></td><td>API 服务（API）</td><td>技术驱动，自助服务，销售周期短</td></tr>
+            <tr><td><strong>有销售资源 (大客户)</strong></td><td>企业集成（EI）</td><td>高客单价，能支撑长销售周期</td></tr>
+            <tr><td><strong>追求快速验证</strong></td><td>数据授权（DL）</td><td>6 个月可上线，快速验证需求</td></tr>
+            <tr><td><strong>追求持续收入</strong></td><td>API 服务（API）</td><td>订阅制，收入可预测</td></tr>
+            <tr><td><strong>追求高壁垒</strong></td><td>企业集成（EI）</td><td>安全合规 + 深度集成，难复制</td></tr>
+            <tr><td><strong>不确定方向</strong></td><td>DL → API</td><td>先验证需求，再规模化</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <h2>阶段化策略建议</h2>
+      <div class="table-wrapper">
+        <table>
+          <thead><tr><th>阶段</th><th>时间</th><th>推荐方案</th><th>目标</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Phase 1</strong></td><td>M1-M6</td><td>数据授权（DL）</td><td>验证需求，产生现金流</td></tr>
+            <tr><td><strong>Phase 2</strong></td><td>M7-M18</td><td>API 服务（API）</td><td>规模化，建立持续收入</td></tr>
+            <tr><td><strong>Phase 3</strong></td><td>M19+</td><td>三模式并行</td><td>全客户覆盖，最大化收入</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <h2>价格谈判策略</h2>
+      <h3>开场报价策略（锚定效应）</h3>
+      <div class="table-wrapper">
+        <table>
+          <thead><tr><th>模式</th><th>开场报价</th><th>目标成交价</th><th>锚定倍数</th></tr></thead>
+          <tbody>
+            <tr><td><strong>数据授权（DL）</strong></td><td>$60,000/年</td><td>$45,000/年</td><td>1.33×</td></tr>
+            <tr><td><strong>API 服务（API）</strong></td><td>$800/月 + $0.02/次</td><td>$500/月 + $0.015/次</td><td>1.6×</td></tr>
+            <tr><td><strong>企业集成（EI）</strong></td><td>$300,000/年 + 30%</td><td>$200,000/年 + 25%</td><td>1.5×</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <h3>ROI 计算模板</h3>
+      <pre>客户年度招聘次数：100 次
+传统招聘成本：100 × $4,700 = $470,000
+Héra 招聘成本：100 × $1,500 = $150,000
+年度节省：$320,000
+Héra 年费：$25,000
+投资回报率：($320,000 - $25,000) / $25,000 = 1,180%</pre>
+    </div>
+
+    <div id="section-8">
+      <h1>8. 风险评估与应对</h1>
+      <h2>风险矩阵</h2>
+      <div class="table-wrapper">
+        <table>
+          <thead><tr><th>风险</th><th>概率</th><th>影响</th><th>风险等级</th><th>应对方案</th><th>负责人</th></tr></thead>
+          <tbody>
+            <tr><td>客户 WTP 低于预期</td><td>中 (40%)</td><td>高</td><td class="risk-high">高</td><td>调整价格至$10K/年或转向企业集成模式</td><td>CEO</td></tr>
+            <tr><td>技术实施延期</td><td>中 (35%)</td><td>中</td><td class="risk-medium">中</td><td>分阶段上线，优先核心功能</td><td>CTO</td></tr>
+            <tr><td>现金流断裂</td><td>低 (20%)</td><td>高</td><td class="risk-high">高</td><td>预留 6 个月运营资金</td><td>CFO</td></tr>
+            <tr><td>数据源被封禁</td><td>中 (30%)</td><td>高</td><td class="risk-high">高</td><td>多 IP 轮换 + 建立备用数据源</td><td>CTO</td></tr>
+            <tr><td>竞争对手跟进</td><td>高 (60%)</td><td>中</td><td class="risk-medium">中</td><td>快速建立客户壁垒 + 持续迭代</td><td>CMO</td></tr>
+            <tr><td>合规风险</td><td>低 (15%)</td><td>高</td><td class="risk-medium">中</td><td>法务审核数据结构 + PII 自动过滤</td><td>法务</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div id="section-9">
+      <h1>9. 实施路线图</h1>
+      <h2>90 天详细行动计划</h2>
+      <div class="table-wrapper">
+        <table>
+          <thead><tr><th>周次</th><th>关键行动</th><th>负责人</th><th>交付物</th><th>成功标准</th></tr></thead>
+          <tbody>
+            <tr><td><strong>W1-W2</strong></td><td>完成数据授权产品定义</td><td>CEO</td><td>产品需求文档</td><td>功能清单确认</td></tr>
+            <tr><td><strong>W3-W4</strong></td><td>完成前 10 个目标客户名单</td><td>CMO</td><td>目标客户清单</td><td>10 个合格线索</td></tr>
+            <tr><td><strong>W5-W6</strong></td><td>完成数据授权技术实现</td><td>CTO</td><td>可交付系统</td><td>内部测试通过</td></tr>
+            <tr><td><strong>W7-W8</strong></td><td>完成首批 5 个客户 POC</td><td>CEO + CTO</td><td>POC 报告</td><td>5 个 POC 完成</td></tr>
+            <tr><td><strong>W9-W10</strong></td><td>完成首批客户签约</td><td>CEO</td><td>签约合同</td><td>≥3 个付费客户</td></tr>
+            <tr><td><strong>W11-W12</strong></td><td>启动 API 模式技术设计</td><td>CTO</td><td>技术架构文档</td><td>架构评审通过</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <h2>里程碑规划</h2>
+      <pre>M1（第 1 月末）: 数据授权产品上线
+    ↓
+M2（第 2 月末）: 签约 3 个付费客户
+    ↓
+M3（第 3 月末）: 实现$50K 月收入，启动 API 开发
+    ↓
+M6（第 6 月末）: API 模式上线，签约 10 个客户
+    ↓
+M12（第 12 月末）: 实现$300K 月收入，启动企业集成模式</pre>
+    </div>
+
+    <div id="section-10">
+      <h1>10. 定价理论模型附录</h1>
+      <h2>10.1 Simon-Kucher 价格三部曲理论</h2>
+      <div class="table-wrapper">
+        <table>
+          <thead><tr><th>策略</th><th>定义</th><th>计算公式</th><th>SKP 观点</th></tr></thead>
+          <tbody>
+            <tr><td><strong>成本导向定价</strong></td><td>基于生产成本 + 目标利润率</td><td>价格 = 成本 × (1 + 目标利润率)</td><td>仅作为底线参考</td></tr>
+            <tr><td><strong>竞争导向定价</strong></td><td>根据竞争对手价格水平设定</td><td>价格 = 竞品价格 × (1 ± 差异化系数)</td><td>需结合竞争分析</td></tr>
+            <tr><td><strong>价值导向定价</strong></td><td>基于客户感知价值设定</td><td>价格 = 客户感知价值 × 价值捕获率</td><td><strong>最理想策略</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <h2>10.2 价格瀑布模型（Price Waterfall）</h2>
+      <pre>标价 (List Price)
+    ↓
+├── 折扣 (Discounts)
+    ↓
+├── 促销 (Promotions)
+    ↓
+├── 返利 (Rebates)
+    ↓
+├── 物流成本 (Logistics Costs)
+    ↓
+├── 付款条件 (Payment Terms)
+    ↓
+实际净收入 (Net Realized Revenue)</pre>
+    </div>
+
+    <div id="section-11">
+      <h1>11. 财务模型附录</h1>
+      <h2>3 年收入预测（数据授权 → API 路径）</h2>
+      <div class="table-wrapper">
+        <table>
+          <thead><tr><th>指标</th><th>第 1 年</th><th>第 2 年</th><th>第 3 年</th></tr></thead>
+          <tbody>
+            <tr><td><strong>总收入</strong></td><td>$600,000</td><td>$3,600,000</td><td>$12,000,000</td></tr>
+            <tr><td><strong>毛利润</strong></td><td>$60,000</td><td>$2,400,000</td><td>$9,360,000</td></tr>
+            <tr><td><strong>毛利率</strong></td><td>10%</td><td>67%</td><td>78%</td></tr>
+            <tr><td><strong>客户数</strong></td><td>10</td><td>50</td><td>150</td></tr>
+            <tr><td><strong>ARPU</strong></td><td>$5,000/月</td><td>$6,000/月</td><td>$6,667/月</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <h2>敏感性分析</h2>
+      <div class="table-wrapper">
+        <table>
+          <thead><tr><th>情景</th><th>收入变化</th><th>第 3 年利润</th><th>触发条件</th></tr></thead>
+          <tbody>
+            <tr><td><strong>乐观</strong></td><td>+30%</td><td>$1,200 万</td><td>客户获取超预期</td></tr>
+            <tr><td><strong>基准</strong></td><td>0%</td><td>$936 万</td><td>按计划执行</td></tr>
+            <tr><td><strong>悲观</strong></td><td>-50%</td><td>$400 万</td><td>客户获取低于预期 50%</td></tr>
+            <tr><td><strong>极端悲观</strong></td><td>-80%</td><td>-$500 万（亏损）</td><td>市场不接受产品</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <h2>盈亏平衡分析</h2>
+      <div class="table-wrapper">
+        <table>
+          <thead><tr><th>模式</th><th>固定成本</th><th>单价</th><th>边际成本</th><th>盈亏平衡客户数</th></tr></thead>
+          <tbody>
+            <tr><td>数据授权（DL）</td><td>$12.3 万/年</td><td>$2.5 万/年</td><td>≈0</td><td>5 个客户</td></tr>
+            <tr><td>API 服务（API）</td><td>$50.4 万/年</td><td>$1.8 万/年</td><td>$200/年</td><td>31 个客户</td></tr>
+            <tr><td>企业集成（EI）</td><td>$148.8 万/年</td><td>$50 万/年</td><td>$5 万/年</td><td>3 个客户</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <h2>单位经济模型</h2>
+      <div class="table-wrapper">
+        <table>
+          <thead><tr><th>指标</th><th>数据授权（DL）</th><th>API 服务（API）</th><th>企业集成（EI）</th></tr></thead>
+          <tbody>
+            <tr><td><strong>CAC（获客成本）</strong></td><td>$5,000</td><td>$15,000</td><td>$50,000</td></tr>
+            <tr><td><strong>LTV（生命周期价值）</strong></td><td>$75,000</td><td>$180,000</td><td>$1,500,000</td></tr>
+            <tr><td><strong>LTV/CAC</strong></td><td>15x</td><td>12x</td><td>30x</td></tr>
+            <tr><td><strong>回本周期</strong></td><td>3 个月</td><td>10 个月</td><td>12 个月</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div id="section-12">
+      <h1>12. 决策者行动清单</h1>
+      <h2>需要立即决策的事项（本周内）</h2>
+      <div class="table-wrapper">
+        <table>
+          <thead><tr><th>决策事项</th><th>选项</th><th>推荐</th><th>理由</th><th>截止时间</th></tr></thead>
+          <tbody>
+            <tr><td><strong>商业模式选择</strong></td><td>A. 数据授权先行<br>B. API 直接上线<br>C. 三模式并行</td><td class="success">A</td><td>现金流友好，风险最低</td><td>本周五</td></tr>
+            <tr><td><strong>启动资金审批</strong></td><td>A. $12 万（DL only）<br>B. $75 万（DL+API）<br>C. $150 万（全模式）</td><td class="success">B</td><td>支撑 12 个月运营</td><td>本周五</td></tr>
+            <tr><td><strong>团队扩张计划</strong></td><td>A. 维持 2-3 人<br>B. 扩至 6 人<br>C. 扩至 13 人</td><td class="success">B</td><td>支撑 API 开发</td><td>下周</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <h2>30 天内需要完成的事项</h2>
+      <div class="table-wrapper">
+        <table>
+          <thead><tr><th>事项</th><th>负责人</th><th>交付物</th><th>截止时间</th></tr></thead>
+          <tbody>
+            <tr><td>完成数据授权产品定义</td><td>CEO</td><td>PRD 文档</td><td>W2</td></tr>
+            <tr><td>完成前 10 个目标客户名单</td><td>CMO</td><td>客户清单</td><td>W2</td></tr>
+            <tr><td>完成技术架构设计</td><td>CTO</td><td>架构文档</td><td>W3</td></tr>
+            <tr><td>完成法务合规审核</td><td>法务</td><td>合规报告</td><td>W4</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <h2>90 天内需要达成的里程碑</h2>
+      <div class="table-wrapper">
+        <table>
+          <thead><tr><th>里程碑</th><th>成功标准</th><th>负责人</th><th>截止时间</th></tr></thead>
+          <tbody>
+            <tr><td>数据授权上线</td><td>内部测试通过</td><td>CTO</td><td>M1</td></tr>
+            <tr><td>签约 3 个付费客户</td><td>合同签署 + 付款</td><td>CEO</td><td>M2</td></tr>
+            <tr><td>实现$50K 月收入</td><td>财务确认</td><td>CFO</td><td>M3</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div id="section-13">
+      <h1>13. 其他补充资料</h1>
+      <h2>13.1 术语表</h2>
+      <div class="table-wrapper">
+        <table>
+          <thead><tr><th>术语</th><th>定义</th></tr></thead>
+          <tbody>
+            <tr><td><strong>ATS</strong></td><td>Applicant Tracking System（求职者追踪系统）</td></tr>
+            <tr><td><strong>PII</strong></td><td>Personally Identifiable Information（个人敏感信息）</td></tr>
+            <tr><td><strong>SLA</strong></td><td>Service Level Agreement（服务级别协议）</td></tr>
+            <tr><td><strong>SOC 2</strong></td><td>Service Organization Control 2（安全合规认证）</td></tr>
+            <tr><td><strong>WTP</strong></td><td>Willingness to Pay（支付意愿）</td></tr>
+            <tr><td><strong>数据授权（DL）</strong></td><td>数据授权模式（数据文件交付）</td></tr>
+            <tr><td><strong>API 服务（API）</strong></td><td>API 服务模式（按调用量计费）</td></tr>
+            <tr><td><strong>企业集成（EI）</strong></td><td>企业集成模式（深度定制 + 分成）</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <h2>13.2 数据来源</h2>
+      <div class="table-wrapper">
+        <table>
+          <thead><tr><th>数据项</th><th>来源</th><th>可信度</th></tr></thead>
+          <tbody>
+            <tr><td>Bloomberg 定价</td><td>官网 + 行业报告</td><td>高</td></tr>
+            <tr><td>Twilio 定价</td><td>官网定价页面</td><td>高</td></tr>
+            <tr><td>Palantir 定价</td><td>行业报告 + 第三方评测</td><td>中</td></tr>
+            <tr><td>竞争对手定价</td><td>官网 + 财报 + 第三方评测</td><td>中 - 高</td></tr>
+            <tr><td>Héra 成本测算</td><td>内部技术评估</td><td>高</td></tr>
+            <tr><td>WTP 测算</td><td>对标分析 + 行业调研</td><td>中</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="footer">
+      <p><strong>— 文档结束 —</strong></p>
+      <p><strong>保密级别：</strong>内部机密 &nbsp;|&nbsp; <strong>严禁外传</strong></p>
+      <p>Héra 定价策略综合报告 V3.7 · 2026 年 3 月 10 日</p>
+    </div>
+  </div>
+</div>
+<script>
+// 平滑滚动 + 点击反馈
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function (e) {
+    e.preventDefault();
+    const target = document.querySelector(this.getAttribute('href'));
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      // 移动端震动反馈
+      if (navigator.vibrate) {
+        navigator.vibrate(10);
+      }
+    }
+  });
+});
+</script>
+</body>
+</html>
