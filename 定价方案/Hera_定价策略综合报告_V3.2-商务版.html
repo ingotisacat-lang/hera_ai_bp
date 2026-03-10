@@ -497,6 +497,7 @@
         <h1 class="chapter-title">目录</h1>
         <div class="toc">
             <ol>
+                <li><a href="#executive-summary">执行摘要</a></li>
                 <li><a href="#section-1">报告目的</a></li>
                 <li><a href="#section-2">公司及产品定位</a></li>
                 <li><a href="#section-3">不同模式下的技术方案</a></li>
@@ -836,7 +837,7 @@
         </table>
     </div>
 
-    <!-- 第 3 章：技术方案 -->
+    <!-- 第 3 章：技术方案（完整 3 个小节） -->
     <div class="page" id="section-3">
         <h1 class="chapter-title">3. 不同模式下的技术方案</h1>
         
@@ -919,6 +920,236 @@
             </tbody>
         </table>
         <p><strong>优势</strong>: 前置条件低、资金需求低、运维简单 &nbsp;&nbsp; <strong>劣势</strong>: 可扩展性差、无持续收入、壁垒低</p>
+
+        <hr>
+        <h2 class="section-title">3.2 API-as-a-Service 模式</h2>
+        
+        <h3>完整技术方案</h3>
+        <pre>┌─────────────────────────────────────────────────────────┐
+│                 API-as-a-Service 技术栈                  │
+├─────────────────────────────────────────────────────────┤
+│  数据获得（同 Data License）                             │
+│  ├── ATS API 连接器                                     │
+│  ├── 网络爬虫                                           │
+│  ├── 连接器健康监控                                     │
+│  └── 数据血缘追踪                                       │
+├─────────────────────────────────────────────────────────┤
+│  API 服务层                                              │
+│  ├── API Gateway（AWS API Gateway → Kong）             │
+│  ├── 鉴权系统（JWT + OAuth2）                          │
+│  ├── 计量计费系统（按调用量）                          │
+│  ├── 熔断器（pybreaker 自适应）                        │
+│  └── 限流系统（令牌桶算法）                            │
+├─────────────────────────────────────────────────────────┤
+│  数据存储                                                │
+│  ├── MongoDB + Elasticsearch（搜索优化）               │
+│  ├── Redis Cluster（缓存层）                           │
+│  └── 备份策略（MongoDB 6h/ES 每日/Redis 每小时）        │
+├─────────────────────────────────────────────────────────┤
+│  监控运维                                                │
+│  ├── 分布式追踪（Jaeger + OpenTelemetry）              │
+│  ├── 合成监控（关键业务场景测试）                      │
+│  ├── 错误预算政策（99% SLA = 7.2h/月）                 │
+│  └── 24/7 on-call 轮班（4 人团队）                      │
+└─────────────────────────────────────────────────────────┘</pre>
+
+        <h3>技术方案多维评分</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>评分维度</th>
+                    <th>分数 (1-5)</th>
+                    <th>说明</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>前置条件</strong></td>
+                    <td>3</td>
+                    <td>需要 API 基础设施和监控体系</td>
+                </tr>
+                <tr>
+                    <td><strong>技术实施难度</strong></td>
+                    <td>3</td>
+                    <td>中等难度，需要高可用设计</td>
+                </tr>
+                <tr>
+                    <td><strong>人员配置要求</strong></td>
+                    <td>3</td>
+                    <td>6 人团队，技能要求中等</td>
+                </tr>
+                <tr>
+                    <td><strong>时间周期</strong></td>
+                    <td>3</td>
+                    <td>6 个月上线（含 SOC 2 认证 8-12 周）</td>
+                </tr>
+                <tr>
+                    <td><strong>资金需求</strong></td>
+                    <td>3</td>
+                    <td>启动资金约 75 万美元</td>
+                </tr>
+                <tr>
+                    <td><strong>运维复杂度</strong></td>
+                    <td>3</td>
+                    <td>需要 24/7 监控和 on-call</td>
+                </tr>
+                <tr>
+                    <td><strong>可扩展性</strong></td>
+                    <td>4</td>
+                    <td>API 模式易于规模化</td>
+                </tr>
+                <tr>
+                    <td><strong>综合评分</strong></td>
+                    <td><strong>3.1/5</strong></td>
+                    <td>适合追求持续收入的团队</td>
+                </tr>
+            </tbody>
+        </table>
+        <p><strong>优势</strong>: 持续收入、可扩展性好、技术壁垒中等 &nbsp;&nbsp; <strong>劣势</strong>: 初始投入高、运维复杂、需要 on-call 文化</p>
+
+        <hr>
+        <h2 class="section-title">3.3 Enterprise Integration 模式</h2>
+        
+        <h3>完整技术方案</h3>
+        <pre>┌─────────────────────────────────────────────────────────┐
+│               Enterprise Integration 技术栈              │
+├─────────────────────────────────────────────────────────┤
+│  数据获得（同 Data License + 定制数据源）                │
+│  ├── ATS API 连接器                                     │
+│  ├── 网络爬虫                                           │
+│  ├── 专属数据源（客户指定）                            │
+│  └── 数据定制清洗                                       │
+├─────────────────────────────────────────────────────────┤
+│  接入层                                                  │
+│  ├── 零信任架构（mTLS + 持续验证）                     │
+│  ├── AWS Direct Connect 专线（1Gbps → 10Gbps）         │
+│  ├── 专属 API 端点（隔离部署）                         │
+│  └── IP 白名单 + 证书绑定                               │
+├─────────────────────────────────────────────────────────┤
+│  安全合规                                                │
+│  ├── 双层加密（数据库 + 应用层）                       │
+│  ├── 密钥管理（HashiCorp Vault + 自动轮换）            │
+│  ├── 审计日志（S3 Object Lock + SIEM 集成）            │
+│  ├── SOC 2 Type II 认证（6-10 周）                      │
+│  └── ISO 27001 认证（6-8 周）                           │
+├─────────────────────────────────────────────────────────┤
+│  运维支撑                                                │
+│  ├── 99.9% SLA（43 分钟/月允许停机）                   │
+│  ├── 专属运维团队（3 人）                               │
+│  ├── 每日收入对账（&gt;1% 差异告警）                      │
+│  └── 专属客户经理（24/7 支持）                         │
+└─────────────────────────────────────────────────────────┘</pre>
+
+        <h3>技术方案多维评分</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>评分维度</th>
+                    <th>分数 (1-5)</th>
+                    <th>说明</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>前置条件</strong></td>
+                    <td>2</td>
+                    <td>需要安全合规认证和专线部署</td>
+                </tr>
+                <tr>
+                    <td><strong>技术实施难度</strong></td>
+                    <td>2</td>
+                    <td>高难度，零信任 + 99.9% SLA</td>
+                </tr>
+                <tr>
+                    <td><strong>人员配置要求</strong></td>
+                    <td>2</td>
+                    <td>13 人团队，技能要求高</td>
+                </tr>
+                <tr>
+                    <td><strong>时间周期</strong></td>
+                    <td>2</td>
+                    <td>9 个月上线（含认证 6 个月）</td>
+                </tr>
+                <tr>
+                    <td><strong>资金需求</strong></td>
+                    <td>2</td>
+                    <td>启动资金约 150 万美元</td>
+                </tr>
+                <tr>
+                    <td><strong>运维复杂度</strong></td>
+                    <td>2</td>
+                    <td>专属团队 + 24/7 支持</td>
+                </tr>
+                <tr>
+                    <td><strong>可扩展性</strong></td>
+                    <td>3</td>
+                    <td>难规模化，但客单价高</td>
+                </tr>
+                <tr>
+                    <td><strong>综合评分</strong></td>
+                    <td><strong>2.1/5</strong></td>
+                    <td>适合有销售资源、追求高壁垒的团队</td>
+                </tr>
+            </tbody>
+        </table>
+        <p><strong>优势</strong>: 高客单价、高粘性、强壁垒 &nbsp;&nbsp; <strong>劣势</strong>: 周期长、人力密集、难规模化</p>
+
+        <hr>
+        <h2 class="section-title">3.4 技术方案对比汇总</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>维度</th>
+                    <th>Data License 模式</th>
+                    <th>API-as-a-Service 模式</th>
+                    <th>Enterprise Integration 模式</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>启动资金</strong></td>
+                    <td>12 万美元</td>
+                    <td>75 万美元</td>
+                    <td>150 万美元</td>
+                </tr>
+                <tr>
+                    <td><strong>首年成本</strong></td>
+                    <td>12.3 万美元</td>
+                    <td>78.4 万美元</td>
+                    <td>148.8 万美元</td>
+                </tr>
+                <tr>
+                    <td><strong>团队规模</strong></td>
+                    <td>2-3 人</td>
+                    <td>6 人</td>
+                    <td>13 人</td>
+                </tr>
+                <tr>
+                    <td><strong>实施周期</strong></td>
+                    <td>6 个月</td>
+                    <td>6 个月</td>
+                    <td>9 个月</td>
+                </tr>
+                <tr>
+                    <td><strong>毛利率</strong></td>
+                    <td>85%</td>
+                    <td>70%</td>
+                    <td>60%</td>
+                </tr>
+                <tr>
+                    <td><strong>规模化难度</strong></td>
+                    <td>低</td>
+                    <td>中</td>
+                    <td>高</td>
+                </tr>
+                <tr>
+                    <td><strong>竞争壁垒</strong></td>
+                    <td>中（5M+ 数据）</td>
+                    <td>高（API 生态）</td>
+                    <td>极高（深度集成）</td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 
     <!-- 第 4 章：定价理论 -->
